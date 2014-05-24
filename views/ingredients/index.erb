@@ -1,0 +1,51 @@
+<% content_for :navigation do %>
+<li><a href="/">Home</a></li> 
+<li><a href="/recipes">Recipes</a></li>
+<li class="active"><a href="/ingredients">Ingredients</a></li>
+<li><a href="/styles">Styles</a></li>
+<li><a href="/calculations">Calculations</a></li>
+<% end %>
+<div class="col-lg-12">
+  <div class="page-header">
+    <h5>Ingredients</h5>
+  </div>
+  <div id="content">
+    <div class="bs-component">
+      <ul class="nav nav-tabs">
+	<li class="active"><a href="#hops" data-toggle="tab">Hops</a></li>
+	<li><a href="#yeasts" data-toggle="tab">Yeasts</a></li>
+	<li><a href="#fermentables" data-toggle="tab">Fermentables</a></li>
+      </ul>
+      <div id="myTabContent" class="tab-content">
+	<div class="tab-pane fade active in" id="hops">
+	  <table class="tbl">
+	    <thead>
+	      <tr>
+		<th>Name</th>
+		<th>Country</th>
+		<th>aa</th>
+	      </tr>
+	    </thead>
+	    <tfoot>
+	    </tfoot>
+	    <tbody>
+	      <% @hops.each do |hop| %>
+	      <tr>
+		<td><%= hop.name %></td>
+		<td><%= hop.country %></td>
+		<td><%= hop.aa %></td>
+	      </tr>
+	      <% end %>
+	    </tbody>
+	  </table>
+	</div>
+	<div class="tab-pane fade active in" id="yeasts">
+	  <p>Yeasts here!</p>
+	</div>
+	<div class="tab-pane fade active in" id="fermentables">
+	  <p>Fermentables here!</p>
+	</div>
+      </div>
+    </div>
+  </div>
+</div>

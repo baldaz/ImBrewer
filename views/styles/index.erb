@@ -1,0 +1,36 @@
+<% content_for :navigation do %>
+<li><a href="/">Home</a></li> 
+<li><a href="/recipes">Recipes</a></li>
+<li><a href="/ingredients">Ingredients</a></li>
+<li class="active"><a href="/styles">Styles</a></li>
+<li><a href="/calculations">Calculations</a></li>
+<% end %>
+<div class="col-lg-12">
+  <div class="page-header">
+    <h5>Styles</h5>
+  </div>
+  <div id="content">
+    <table class="tbl">
+      <thead>
+	<tr>
+	  <th>Style</th>
+	  <th>OG</th>
+	  <th>FG</th>
+	  <th>IBU</th>
+	  <th>ABV</th>
+	</tr>
+      </thead>
+      <tfoot>
+      </tfoot>
+      <tbody>
+	<% @styles.each do |style| %>
+	<tr>
+	  <td><%= style.name %></td>
+	  <td><%= style.og %></td>
+	  <td><%= style.fg %></td>
+	  <td><%= style.ibu %></td>
+	  <td><%= style.abv %></td>
+	</tr>
+	<% end %>
+      </tbody>
+    </table>
