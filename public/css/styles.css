@@ -86,12 +86,12 @@ label {
     font-size: 0.8em
 }
 input[type="number"], input[type="text"] {
-    width:45%;
+    width: 45%;
     font-size: 0.8em;
     background-color: rgba(255,255,255,0.5)
 }
 #style, #fermentable_1, #fermentable_2, #fermentable_3, #hop_name {
-    width:100%;
+    width:90%;
     font-size: 0.675em;
     background-color: rgba(255,255,255,0.5)
 }
