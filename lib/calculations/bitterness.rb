@@ -42,11 +42,11 @@ class Tinseth
   end
 
   def bigness_factor(wort_gravity)
-    1.65 * 0.000125 ** (wort_gravity.to_f - 1.0)
+    1.65 * 0.000125 ** (((wort_gravity.to_f) * 0.001) - 1.0)
   end
 
   def boil_time_factor(time)
-    1 - Math.exp((-0.04 * time.to_f) / 4.15)
+    (1 - Math.exp(-0.04 * time.to_f)) / 4.15
   end
 end
 

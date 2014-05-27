@@ -51,20 +51,22 @@ get "/calculations" do
 end
 
 get "/calculations/ibu" do
-  hop_grams = params[:hop_grams]
-  alpha_acid_percentage = params[:alpha_acid]
-  boil_time = params[:boil_time]
-  batch_liters = params[:batch_size]
+  hop_grams = params[:hop_grams].to_f
+  alpha_acid_percentage = params[:alpha_acid].to_f
+  boil_time = params[:boil_time].to_i
+  batch_liters = params[:batch_size].to_f
+  original_gravity = params[:og].to_f
+  final_gravity = params[:fg].to_f
 
   rg = Rager.new
   util_percentage = rg.util_percentage(boil_time.to_i)
-#  @output = rg.ibu(hop_grams.to_i, util_percentage, alpha_acid_percentage.to_i, batch_liters.to_i, 0)
+  rager_ibu = (rg.ibu(hop_grams, (util_percentage / 100), (alpha_acid_percentage / 100), batch_liters, 0) * 100).to_i / 100.0
   ts = Tinseth.new
-  b_t_factor = ts.boil_time_factor(boil_time.to_i)
-  b_factor = ts.bigness_factor(1050)
+  b_t_factor = ts.boil_time_factor(boil_time)
+  b_factor = ts.bigness_factor(original_gravity)
   aa_util = ts.alpha_acid_utilization(b_factor, b_t_factor)
-  mg_aa = ts.mg_alpha_acids(alpha_acid_percentage.to_i, hop_grams.to_i, batch_liters.to_i)
-#  @output = ts.ibu(aa_util, mg_aa)
-  @output = b_factor
+  mg_aa = ts.mg_alpha_acids(alpha_acid_percentage / 100, hop_grams, batch_liters)
+  tinseth_ibu = (ts.ibu(aa_util, mg_aa) * 100).to_i / 100.0
+  @output = (rager_ibu + tinseth_ibu) / 2
   erb :"calculations/_ibu_result", :layout => false
 end
