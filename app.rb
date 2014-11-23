@@ -8,8 +8,9 @@ require_relative "lib/calculations/bitterness"
 
 class Hops < ActiveRecord::Base
 end
-
 class Styles < ActiveRecord::Base
+end
+class Recipe < ActiveRecord::Base
 end
 
 helpers do
@@ -36,6 +37,7 @@ get "/ingredients" do
 end
 
 get "/recipes" do
+  @recipe = Recipe.order("IdRicetta ASC");
   erb :"recipes/index"
 end
 
@@ -67,6 +69,6 @@ get "/calculations/ibu" do
   aa_util = ts.alpha_acid_utilization(b_factor, b_t_factor)
   mg_aa = ts.mg_alpha_acids(alpha_acid_percentage / 100, hop_grams, batch_liters)
   tinseth_ibu = (ts.ibu(aa_util, mg_aa) * 100).to_i / 100.0
-  @output = (rager_ibu + tinseth_ibu) / 2
+  @output = ((rager_ibu + tinseth_ibu) / 2) / 1000
   erb :"calculations/_ibu_result", :layout => false
 end

@@ -1,7 +1,12 @@
+@import url("http://fonts.googleapis.com/css?family=Delius");
+
+*{ margin: 0; padding: 0; box-sizing: border-box;}
+
 html, body {
     height: 100%
 }
 body {
+  font-family: Delius;
     background: #f9f9f9 url('/images/hops-green.png') no-repeat;
     background-position: center;
     background-attachment: fixed;
@@ -13,29 +18,32 @@ body p {
     text-align: justify;
     margin: 1.5em 0
 }
+h5,h6 {font-family:Delius;}
+#footer p {text-align:center;}
 .navbar-brand {
-    font-size: 1.5em;
-    font-weight: 500
+  font-size: 2em;
+  font-weight: 500
 }
 .navbar.navbar-default {
-    border-radius: 0;
-    background-color: #f0f0f0;
-    box-shadow: 0px 6px 8px -2px #bbb
+  font-family:Delius;
+  border-radius: 0;
+  background-color: #f0f0f0;
+  box-shadow: 0px 6px 8px -2px #bbb
 }
-#content {
-    min-height: 60%
-}
+.navbar.navbar-default a {transition:all .7s;}
+.navbar.navbar-default a.active{border-color:green;}
+#content {min-height: 75%}
 .tbl {
-    width:100%;
-    margin-right:2%;
-    border-collapse:collapse
+  width:100%;
+  margin-right:2%;
+  border-collapse:collapse
 }
 .tbl th {
-    border-bottom: 1px solid #777777;
-    text-align: left;
-    padding: 0.5em;
-    background: transparent!important;
-    font-size: 0.7em
+  border-bottom: 1px solid #777777;
+  text-align: left;
+  padding: 0.5em;
+  background: transparent!important;
+  font-size: 0.7em
 }
 .tbl td {
     padding: 2px;
@@ -50,18 +58,18 @@ body p {
     width: 6px;
 }
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     -webkit-border-radius: 10px;
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(0,0,0,0.3); 
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    background: rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(0,0,0,0.4); 
+	background: rgba(0,0,0,0.4);
 }
 ::-webkit-input-placeholder {
    font-size:0.9em;
@@ -99,4 +107,102 @@ input[type="number"], input[type="text"] {
 }
 .panel-heading {
     background: #f00
+}
+
+/* login form */
+
+main {
+  width:500px; margin:10px auto; padding-bottom:10px;
+  background:rgba(255,255,255,0.7); border-radius:5px; overflow:hidden;
+  box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
+}
+h1{
+  font-size:24px; font-weight:bold;
+  background:#F0F0F0; color:#4582EC;
+  text-align:center;font-family:Delius;
+  padding:20px 0; margin-bottom:40px;
+}
+.flp{padding:0 50px;}
+.flp div{position:relative; margin-bottom:30px;}
+.flp input,.flp label{
+  width:400px; display:block;
+  font:inherit; font-size:16px; line-height:14px;
+  height: 36px; border:1px solid #999;
+}
+.flp input{padding:10px; outline:none; border-radius:3px;}
+.flp label{
+  position:absolute; left:0; top:0;
+  padding:10px 8px; border-color:transparent;
+  color:#666; cursor:text;
+}
+.ch {
+  display:block; float:left;
+  position:relative; background:white;
+}
+.ch:first-child{padding-left:2px;}
+.ch:last-child{padding-right:2px;}
+.focussed{pointer-events:none;}
+/* form recipes */
+#msform {
+  width:500px; margin:10px auto;
+  text-align:center; position:relative;
+}
+#msform fieldset{
+  background:rgba(255,255,255,0.7); border:0 none;
+  border-radius:10px; box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
+  padding:20px 30px; box-sizing:border-box; width:80%;
+  margin:0 10%; position:absolute;
+}
+#msform fieldset:not(:first-of-type) {
+  display:none;
+}
+#msform input {
+  padding:5px; border:1px solid #ccc;
+  border-radius:3px; margin-bottom:10px;
+  width:100%; box-sizing:border-box;
+  font-family:Delius; color:#2C3E50; font-size:13px;
+}
+#msform .action-button {
+  width:100px; background:#4582EC;
+  font-weight:bold; color:white;
+  border:0 none; border-radius:5px;
+  cursor:pointer; padding:10px 5px;
+  margin:10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow:0 0 0 2px white, 0 0 0 3px #4582EC;
+}
+.fs-title {
+  font-size:15px; text-transform:uppercase;
+  color:#4582EC; margin-bottom:5px; font-family:Delius;
+}
+.fs-subtitle {
+  font-weight:normal; font-size:13px; color:#666;
+  margin-bottom:15px; font-family:Delius;
+}
+#progressbar {
+  margin-bottom:15px; overflow:hidden; counter-reset:step;
+}
+#progressbar li {
+  list-style-type:none; color:#4582EC;
+  text-transform:uppercase; font-size:9px;
+  width:33.33%; float:left; position:relative;
+}
+#progressbar li:before {
+  content:counter(step);
+  counter-increment:step;
+  width:20px; line-height:20px; display:block;
+  font-size:10px; color:#333; background:#F0F0F0;
+  border-radius:3px; margin:0 auto 5px auto;
+}
+#progressbar li:after {
+  content:''; width:100%; height:2px;
+  background:#F0F0F0; position:absolute;
+  left:-50%; top:9px; z-index:-1; /* behind numbers */
+}
+#progressbar li:first-child:after {
+  content:none;
+}
+#progressbar li.pbactive:before, #progressbar li.pbactive.after {
+  background:#4582EC; color:white;
 }

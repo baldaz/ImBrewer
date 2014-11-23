@@ -1,8 +1,89 @@
 <% content_for :navigation do %>
-<li><a href="/">Home</a></li> 
+<li><a href="/">Home</a></li>
 <li class="active"><a href="/recipes">Recipes</a></li>
 <li><a href="/ingredients">Ingredients</a></li>
 <li><a href="/styles">Styles</a></li>
 <li><a href="/calculations">Calculations</a></li>
 <% end %>
-<p>Recipes here!</p>
+<div id="content">
+  <div class="bs-component">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#insert" data-toggle="tab">Insert</a></li>
+      <li><a href="#list" data-toggle="tab">List</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="insert">
+        <form id="msform">
+          <!-- progressbar -->
+          <ul id="progressbar">
+            <li class="pbactive">Recipe base specifications</li>
+            <li>Ingredients</li>
+            <li>Phases</li>
+          </ul>
+          <!-- fieldsets -->
+          <fieldset>
+            <h2 class="fs-title">Insert specifications</h2>
+            <h3 class="fs-subtitle">Step 1</h3>
+            <input type="text" name="name" id="name" placeholder="Recipe name" />
+            <input type="text" name="ibu" placeholder="Ibu" />
+            <input type="text" name="og" placeholder="Original Gravity" />
+            <input type="text" name="alcool" placeholder="Alcool %" />
+            <input type="text" name="batch" placeholder="Batch size" />
+            <input type="button" name="next" class="next action-button" value="next" />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Insert ingredients</h2>
+            <h3 class="fs-subtitle">Step 2</h3>
+            <input type="text" name="malt" placeholder="Malt name" />
+            <input type="text" name="hop" placeholder="Hop name" />
+            <input type="text" name="yeast" placeholder="Yeast name" />
+            <input type="button" name="previous" class="previous action-button" value="previous" />
+            <input type="button" name="next" class="next action-button" value="next" />
+          </fieldset>
+          <fieldset>
+            <h2 class="fs-title">Insert phases</h2>
+            <h3 class="fs-subtitle">Step 3</h3>
+            <input type="text" name="mash" placeholder="Mashing phase 1" />
+            <input type="text" name="timemash" placeholder="Time mashing phase 1" />
+            <input type="text" name="hopping" placeholder="Hopping phase 1" />
+            <input type="text" name="timehop" placeholder="Time hopping phase 1" />
+            <input type="button" name="previous" class="previous action-button" value="previous" />
+            <input type="submit" name="submit" class="submit action-button" value="submit" />
+          </fieldset>
+        </form>
+      </div>
+      <div class="tab-pane fade" id="list">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Style</th>
+              <th>Type</th>
+              <th>OG</th>
+              <th>FG</th>
+              <th>IBU</th>
+              <th>Alcool</th>
+              <th>Batch</th>
+              <th>Boil time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @recipe.each do |rcp| %>
+            <tr>
+              <td><%= rcp.Nome %></td>
+              <td><%= rcp.Stile %></td>
+              <td><%= rcp.Tipologia %></td>
+              <td><%= rcp.OG %></td>
+              <td><%= rcp.FG %></td>
+              <td><%= rcp.IBU %> %</td>
+              <td><%= rcp.Alcool %></td>
+              <td><%= rcp.Litri %> liters</td>
+              <td><%= rcp.TempoBollitura %> min</td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
