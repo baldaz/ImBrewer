@@ -79,7 +79,7 @@ get "/calculations/ibu" do
   erb :"calculations/_ibu_result", :layout => false
 end
 
-get "/calculations/plato" do
+get "/calculations/ibuog" do
   o_gravity = params[:og].to_f;
   @output = (((o_gravity - 1000) / o_gravity) * 261).to_i
   erb :"calculations/_ibu_result", :layout => false
