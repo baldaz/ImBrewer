@@ -3,6 +3,8 @@
 require "sinatra"
 require "sinatra/activerecord"
 require "sinatra/contrib"
+require "sinatra/json"
+require "json"
 require "./environments"
 require_relative "lib/calculations/bitterness"
 
@@ -25,6 +27,11 @@ helpers do
   def ibu_result
     erb :"calculations/_ibu_result"
   end
+
+  def recipe_JSON
+    @recipe = Recipe.order("IdRicetta ASC")
+    json :@recipe
+  end
 end
 
 get "/" do
@@ -36,8 +43,13 @@ get "/ingredients" do
   erb :"ingredients/index"
 end
 
+get "/json/hops", :provides => :json do
+  @hops_res = Hops.order("name ASC").to_json
+  erb :"json/hops", :layout => false
+end
+
 get "/recipes" do
-  @recipe = Recipe.order("IdRicetta ASC");
+  @recipe = Recipe.order("IdRicetta ASC")
   erb :"recipes/index"
 end
 
@@ -60,15 +72,15 @@ get "/calculations/ibu" do
   original_gravity = params[:og].to_f
   final_gravity = params[:fg].to_f
 
-  rg = Rager.new
-  util_percentage = rg.util_percentage(boil_time.to_i)
-  rager_ibu = (rg.ibu(hop_grams, (util_percentage / 100), (alpha_acid_percentage / 100), batch_liters, 0) * 100).to_i / 100.0
-  ts = Tinseth.new
-  b_t_factor = ts.boil_time_factor(boil_time)
-  b_factor = ts.bigness_factor(original_gravity)
-  aa_util = ts.alpha_acid_utilization(b_factor, b_t_factor)
-  mg_aa = ts.mg_alpha_acids(alpha_acid_percentage / 100, hop_grams, batch_liters)
-  tinseth_ibu = (ts.ibu(aa_util, mg_aa) * 100).to_i / 100.0
-  @output = ((rager_ibu + tinseth_ibu) / 2) / 1000
+  btns = Bitterness.new(hop_grams, boil_time, alpha_acid_percentage, batch_liters, original_gravity)
+  rg = Rager.new(btns)
+  ts = Tinseth.new(btns)
+  @output = ((rg.ibu.round(1).to_i / 100) + ts.ibu.round(1).to_i) / 2
+  erb :"calculations/_ibu_result", :layout => false
+end
+
+get "/calculations/plato" do
+  o_gravity = params[:og].to_f;
+  @output = (((o_gravity - 1000) / o_gravity) * 261).to_i
   erb :"calculations/_ibu_result", :layout => false
 end

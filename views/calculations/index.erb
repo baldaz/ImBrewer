@@ -1,11 +1,11 @@
 <% content_for :navigation do %>
-<li><a href="/">Home</a></li> 
-<li><a href="/recipes">Recipes</a></li>
-<li><a href="/ingredients">Ingredients</a></li>
-<li><a href="/styles">Styles</a></li>
-<li class="active"><a href="/calculations">Calculations</a></li>
+<li><a href="/"><i class="fa fa-home"></i>Home</a></li>
+<li><a href="/recipes"><i class="fa fa-plus-circle"></i>Recipes</a></li>
+<li><a href="/ingredients"><i class="fa fa-folder-open"></i>Ingredients</a></li>
+<li><a href="/styles"><i class="fa fa-beer"></i>Styles</a></li>
+<li class="active"><a href="/calculations"><i class="fa fa-cog"></i>Calculations</a></li>
 <% end %>
-<div class="col-lg-12">
+<div class="col-lg-12" data-ng-app="" data-ng-init="og=1010;fg=1005;batch=23;kg=5;">
   <div class="page-header">
     <h5>Calculations</h5>
   </div>
@@ -15,157 +15,136 @@
       <h6 class="panel-title">Results</h6>
     </div>
     <div class="panel-body">
-      IBU: <span id="output"><%= ibu_result %></span>
+      IBU: <span id="output" class="resultset"><%= ibu_result %></span>
+      Plato: <span id="ploutput" class="resultset">{{ ((og - 1000)/ og) * 261 | number:1}}</span>
+      Alcool: <span id="alcout" class="resultset">{{ (og - fg) / 7.5 | number:1 }} %</span>
+      SRM: <span id="srmout" class="resultset">{{ (3 * (kg / 0.453)) / (batch / 4.54) | number:1 }}</span>
     </div>
   </div>
   <div class="well bs-component">
     <form class="form-horizontal" action="" method="post" role="form">
       <fieldset>
-	<legend>Specifications</legend>
-	<div class="form-group">
-	  
-	  <label for="style" class="col-xs-1 control-label">Style</label>
-	  <div class="col-xs-3">
-	    <select class="form-control input-sm" id="style">
-	      <% @styles.each do |style| %>
-	      <option><%= style.name %></option>
-	      <% end %>
-	    </select>
-	  </div>
-	  <label for="batch_size" class="col-xs-1 control-label">Batch</label>
-	  <div class="col-xs-2">
-	    <input class="form-control input-sm" id="batch_size" type="number" min="23" max="10000" value="23">
-	  </div>
-	  <label for="efficiency" class="col-xs-1 control-label">Efficiency</label>
-	  <div class="col-xs-2">
-	    <input class="form-control input-sm" id="efficiency" type="number" min="50" max="95" value="70">
-	  </div>
-	</div>
-	<div class="form-group">
-	  <label for="og" class="col-xs-1 control-label">OG</label>
-	  <div class="col-xs-3">
-	    <input class="form-control input-sm" id="og" type="number" min="1000" max="1100" value="1000">
-	  </div>
-	  <label for="fg" class="col-xs-1 control-label">FG</label>
-	  <div class="col-xs-3">
-	    <input class="form-control input-sm" id="fg" type="number" min="1000" max="1100" value="1000">
-	  </div>
-	</div>
+        <legend>Specifications</legend>
+        <div class="form-group">
+
+          <label for="style" class="col-xs-1 control-label">Style</label>
+          <div class="col-xs-2">
+            <select class="form-control input-sm" id="style">
+              <% @styles.each do |style| %>
+              <option><%= style.name %></option>
+              <% end %>
+            </select>
+          </div>
+          <label for="batch_size" class="col-xs-1 control-label">Batch</label>
+          <div class="col-xs-2">
+            <input class="form-control input-sm" id="batch_size" type="number" min="23" max="10000" value="23" ng-model="batch">
+          </div>
+          <label for="efficiency" class="col-xs-1 control-label">Efficiency</label>
+          <div class="col-xs-2">
+            <input class="form-control input-sm" id="efficiency" type="number" min="50" max="95" value="70">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="og" class="col-xs-1 control-label">OG</label>
+          <div class="col-xs-2">
+            <input class="form-control input-sm" id="og" type="number" min="1000" max="1100" value="1010" ng-model="og">
+          </div>
+          <label for="fg" class="col-xs-1 control-label">FG</label>
+          <div class="col-xs-2">
+            <input class="form-control input-sm" id="fg" type="number" min="1000" max="1100" value="1000" ng-model="fg">
+          </div>
+        </div>
       </fieldset>
       <fieldset>
-	<legend>Grain bill</legend>
-	<div class="input_fields_wrap">
-	<button class="add_field_button">+</button>
-	<div class="form-group">
-	  <label for="fermentable_1" class="col-xs-1 control-label">Fermentable #1</label>
-	  <div class="col-xs-3">
-	    <select class="form-control input-sm" id="fermentable_1">
-	      <option>Pilsener</option>
-	      <option>Cara pils</option>
-	      <option>Flaked corn</option>
-	    </select>
-	  </div>
-	  <label for="kg_fermentable_1" class="col-xs-1 control-label">Kg</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="kg_fermentable_1">
-	  </div>
-	</div>
-	</div>
+        <legend>Grain bill</legend>
+        <div class="input_fields_wrap_malt">
+          <div class="form-group">
+            <label for="fermentable_1" class="col-xs-1 control-label">Malt</label>
+            <div class="col-xs-2">
+              <select class="form-control input-sm" id="fermentable_1">
+                <option>Pilsener</option>
+                <option>Cara pils</option>
+                <option>Flaked corn</option>
+              </select>
+            </div>
+            <label for="kg_fermentable_1" class="col-xs-1 control-label">Kg</label>
+            <div class="col-xs-2">
+              <input type="text" class="form-control input-sm" id="kg_fermentable_1" ng-model="kg">
+            </div>
+            <div class="col-xs-1">
+              <button class="btn btn-xs add_field_button_malt"><i class="fa fa-plus-circle"></i></button>
+            </div>
+          </div>
+        </div>
       </fieldset>
       <fieldset>
-	<legend>Hop bill</legend>
-	<div class="form-group">
-	  <label for="hop_name" class="col-xs-1 control-label">Hop name</label>
-	  <div class="col-xs-2">
-	    <select class="form-control input-sm" id="hop_name" >
-	      <% @hops.each do |hop| %>
-	      <option><%= hop.name %></option>
-	      <% end %>
-	    </select>
-	  </div>
-	  <label for="hop_grams" class="col-xs-1 control-label">Grams</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="hop_grams">
-	  </div>
-	  <label for="alpha_acid" class="col-xs-1 control-label">Alpha acid</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="alpha_acid">
-	  </div>
-	  <label for="boil_time" class="col-xs-1 control-label">Boil time</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="boil_time">
-	  </div>
-	</div>
-	<div class="form-group">
-	  <label for="hop_name" class="col-xs-1 control-label">Hop name</label>
-	  <div class="col-xs-2">
-	    <select class="form-control input-sm" id="hop_name" >
-	      <% @hops.each do |hop| %>
-	      <option><%= hop.name %></option>
-	      <% end %>
-	    </select>
-	  </div>
-	  <label for="hop_grams" class="col-xs-1 control-label">Grams</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="hop_grams">
-	  </div>
-	  <label for="alpha_acid" class="col-xs-1 control-label">Alpha acid</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="alpha_acid">
-	  </div>
-	  <label for="boil_time" class="col-xs-1 control-label">Boil time</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="boil_time">
-	  </div>
-	</div>
-	<div class="form-group">
-	  <label for="hop_name" class="col-xs-1 control-label">Hop name</label>
-	  <div class="col-xs-2">
-	    <select class="form-control input-sm" id="hop_name" >
-	      <% @hops.each do |hop| %>
-	      <option><%= hop.name %></option>
-	      <% end %>
-	    </select>
-	  </div>
-	  <label for="hop_grams" class="col-xs-1 control-label">Grams</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="hop_grams">
-	  </div>
-	  <label for="alpha_acid" class="col-xs-1 control-label">Alpha acid</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="alpha_acid">
-	  </div>
-	  <label for="boil_time" class="col-xs-1 control-label">Boil time</label>
-	  <div class="col-xs-2">
-	    <input type="text" class="form-control input-sm" id="boil_time">
-	  </div>
-	</div>
+        <legend>Hop bill</legend>
+        <div class="input_fields_wrap_hop">
+          <div class="form-group">
+            <label for="hop_name" class="col-xs-1 control-label">Hop</label>
+            <div class="col-xs-2">
+              <select class="form-control input-sm" id="hop_name" >
+                <% @hops.each do |hop| %>
+                <option><%= hop.name %></option>
+                <% end %>
+              </select>
+            </div>
+            <label for="hop_grams" class="col-xs-1 control-label">Grams</label>
+            <div class="col-xs-1">
+              <input type="text" class="form-control input-sm" id="hop_grams">
+            </div>
+            <label for="alpha_acid" class="col-xs-1 control-label">Alpha acid</label>
+            <div class="col-xs-1">
+              <input type="text" class="form-control input-sm" id="alpha_acid">
+            </div>
+            <label for="boil_time" class="col-xs-1 control-label">Boil time</label>
+            <div class="col-xs-1">
+              <input type="text" class="form-control input-sm" id="boil_time">
+            </div>
+            <div class="col-xs-1">
+              <button class="btn btn-xs add_field_button_hop"><i class="fa fa-plus-circle"></i></button>
+            </div>
+          </div>
+        </div>
       </fieldset>
     </form>
   </div>
 </div>
 <script>
-  $("form").change(function(){
-//     alert("ciao");
-     var gm, aa, bt, bs;
-     gm = $("#hop_grams").val();
-     aa = $("#alpha_acid").val();
-     bt = $("#boil_time").val();
-     bs = $("#batch_size").val();
+$("form").change(function(){
+  //     alert("ciao");
+  var gm, aa, bt, bs;
+  gm = $("#hop_grams").val();
+  aa = $("#alpha_acid").val();
+  bt = $("#boil_time").val();
+  bs = $("#batch_size").val();
+  og = $("#og").val();
 
-     if(gm !== '' && aa !== '' &&
-        bt !== '' && bs !== ''){
-        $.ajax({
-           type: "GET",
-           url: "/calculations/ibu",
-           data: { hop_grams:gm, alpha_acid:aa, boil_time:bt, batch_size:bs },
-           success:function(rubydata){
-             $("#output").html(rubydata);
-           },
-           error:function(request){
-             $("#output").html(request.responseText);
-           },
-        });
-      }
+  if(gm !== '' && aa !== '' &&
+    bt !== '' && bs !== ''){
+      $.ajax({
+        type: "GET",
+        url: "/calculations/ibu",
+        data: { hop_grams:gm, alpha_acid:aa, boil_time:bt, batch_size:bs, og:og },
+        success:function(rubydata){
+          $("#output").html(rubydata);
+        },
+        error:function(request){
+          $("#output").html(request.responseText);
+        },
+      });
+
+      $.ajax({
+        type: "GET",
+        url: "calculations/plato",
+        data:{og:og},
+        success:function(ogData){
+          $("#ploutput").html(ogData);
+        },
+        error:function(request){
+          $("#ploutput").html(request.responseText);
+        }
+      });
+    }
   });
-</script>
+  </script>

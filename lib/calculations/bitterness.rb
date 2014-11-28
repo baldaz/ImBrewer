@@ -1,52 +1,52 @@
 #!/usr/bin/env ruby
 
+class Bitterness
+
+  attr_reader :hop_grams, :time, :aa_percentage, :batch_size, :og
+
+  def initialize(grams, minutes, aa, batch, gravity)
+    @hop_grams = grams
+    @time = minutes
+    @aa_percentage = aa
+    @batch_size =  batch
+    @og = gravity
+  end
+
+end
+
 class Rager
-  
-  def initialize
+
+  attr_reader :btns
+  attr_writer :util, :adjustment
+
+  def initialize(bitnss)
+    @btns = bitnss
+    @util = 18.11 + 13.86 * Math.tanh((@btns.time - 31.32) / 18.27)
+    @adjustment = (@btns.og - 1050) / 2 unless @btns.og <= 1050 else @adjustment = 0
   end
 
-  def ibu(hop_grams, util_percentage, alpha_acid_percentage, batch_liters, adjustment)
-    ((hop_grams * util_percentage * alpha_acid_percentage * 1000) /
-            (batch_liters * (1 + adjustment)))
+  def ibu
+    ((@btns.hop_grams * @util * @btns.aa_percentage * 10) /
+            (@btns.batch_size * (1 + @adjustment)))
   end
 
-  def util_percentage(minutes)
-    18.11 + 13.86 * Math.tanh((minutes - 31.32) / 18.27)
-  end
-  
-  def adjustment_factor(boil_gravity)
-    if boil_gravity > 1050
-      (boil_gravity - 1050) / 0.2
-    else
-      0
-    end
-  end
-  
 end
 
-class Tinseth
+class Tinseth < Rager
 
-  def initialize
+  alias_method :rager_ibu, :ibu
+
+  def initialize(bitnss)
+    super(bitnss)
+    @util = 1
+    @adjustment = 0
+    @mg_alpha_acid = rager_ibu
+    @b_factor = 1.65 * (Math.exp(((@btns.og * 0.001) - 1.0) / 0.111))
+    @bt_factor = (1 - Math.exp(-0.04 * @btns.time)) / 4.15
   end
 
-  def ibu(alpha_acid_utilization, mg_alpha_acids)
-    alpha_acid_utilization * mg_alpha_acids
+  def ibu
+    @b_factor * @bt_factor * @mg_alpha_acid
   end
 
-  def mg_alpha_acids(alpha_acid, hop_grams, batch_liters)
-    alpha_acid * hop_grams * 1000 / batch_liters
-  end
-
-  def alpha_acid_utilization(bigness_factor, boil_time_factor)
-    bigness_factor * boil_time_factor
-  end
-
-  def bigness_factor(wort_gravity)
-    1.65 * 0.000125 ** (((wort_gravity.to_f) * 0.001) - 1.0)
-  end
-
-  def boil_time_factor(time)
-    (1 - Math.exp(-0.04 * time.to_f)) / 4.15
-  end
 end
-
