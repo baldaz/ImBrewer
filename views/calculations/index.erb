@@ -5,40 +5,53 @@
 <li><a href="/styles"><i class="fa fa-beer"></i>Styles</a></li>
 <li class="active"><a href="/calculations"><i class="fa fa-cog"></i>Calculations</a></li>
 <% end %>
-<div class="col-lg-12 col-md-12 col-xs-12" data-ng-app="" data-ng-init="og=1010;fg=1005;batch=23;kg=5;ibu=0;">
+<div class="col-lg-12 col-md-12 col-xs-12" data-ng-app="" data-ng-init="og=1010;fg=1005;batch=23;kg=5;">
   <div class="page-header">
     <h5>Calculations</h5>
   </div>
   <!--<div class="well bs-component">-->
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h6 class="panel-title">Results</h6>
+      <h6 class="panel-title">Results  for  <span id="rcpname">generic recipe</span></h6>
     </div>
     <div class="panel-body">
       IBU: <span id="output" class="resultset"><%= ibu_result %></span>
       Plato: <span id="ploutput" class="resultset">{{ ((og - 1000)/ og) * 261 | number:1}}</span>
       Alcool: <span id="alcout" class="resultset">{{ (og - fg) / 7.5 | number:1 }} %</span>
       SRM: <span id="srmout" class="resultset">{{ (3 * (kg / 0.453)) / (batch / 4.54) | number:1 }}</span>
-      IBU/OG: <span id="ibuoguout" class="resultset">{{ (og - 1000) / ibu | number:2 }}</span>
     </div>
   </div>
   <div class="well bs-component">
-    <form class="form-horizontal" action="" method="post" role="form">
+    <form class="form-horizontal" id="rcpform" action="" method="post" role="form">
+      <fieldset>
+        <legend>Recipe</legend>
+        <div class="form-group">
+          <label for="recipe" class="col-xs-1 control-label">Recipe</label>
+          <div class="col-lg-3 col-md-3 col-xs-3">
+            <select id="recipe" class="form-control input-sm">
+              <option value="">generic recipe</option>
+              <% @recipe.each do |rcp| %>
+              <option value='<%= rcp.id %>'><%= rcp.Nome %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </fielset>
+    </form>
+    <form class="form-horizontal" id="specform" action="" method="post" role="form">
       <fieldset>
         <legend>Specifications</legend>
         <div class="form-group">
-
           <label for="style" class="col-xs-1 control-label">Style</label>
           <div class="col-xs-2">
             <select class="form-control input-sm" id="style">
               <% @styles.each do |style| %>
-              <option><%= style.name %></option>
+              <option value='<%= style.name %>'><%= style.name %></option>
               <% end %>
             </select>
           </div>
           <label for="batch_size" class="col-xs-1 control-label">Batch</label>
           <div class="col-xs-2">
-            <input type="text" id="hid" value="0" ng-model="ibu" style="display:none">
             <input class="form-control input-sm" id="batch_size" type="number" min="23" max="10000" value="23" ng-model="batch">
           </div>
           <label for="efficiency" class="col-xs-1 control-label">Efficiency (%)</label>
@@ -113,41 +126,55 @@
   </div>
 </div>
 <script>
-$("form").change(function(){
-  //     alert("ciao");
-  var gm, aa, bt, bs;
-  gm = $("#hop_grams").val();
-  aa = $("#alpha_acid").val();
-  bt = $("#boil_time").val();
-  bs = $("#batch_size").val();
-  og = $("#og").val();
+  $("#specform").change(function(){
+    var gm, aa, bt, bs;
 
-  if(gm !== '' && aa !== '' &&
-    bt !== '' && bs !== ''){
+     $("#recipe").val(null);
+
+    gm = $("#hop_grams").val();
+    aa = $("#alpha_acid").val();
+    bt = $("#boil_time").val();
+    bs = $("#batch_size").val();
+    og = $("#og").val();
+
+    if(gm !== '' && aa !== '' &&
+      bt !== '' && bs !== ''){
+        $.ajax({
+          type: "GET",
+          url: "/calculations/ibu",
+          data: { hop_grams:gm, alpha_acid:aa, boil_time:bt, batch_size:bs, og:og },
+          success:function(rubydata){
+            $("#output").html(rubydata);
+            // $("#hid").val(rubydata);
+          },
+          error:function(request){
+            $("#output").html(request.responseText);
+          },
+        });
+      }
+    });
+
+    $("#rcpform").change(function() {
+      var rcp = $("#recipe").val();
+      var input = $('input');
+      $("#rcpname").html($('#recipe :selected').text());
       $.ajax({
         type: "GET",
-        url: "/calculations/ibu",
-        data: { hop_grams:gm, alpha_acid:aa, boil_time:bt, batch_size:bs, og:og },
-        success:function(rubydata){
-          $("#output").html(rubydata);
-          $("#hid").val(rubydata);
+        dataType: "json",
+        contentType: "application/json",
+        url: "/recipes/"+rcp,
+        success:function(rcpdata) {
+          $("#output").html(rcpdata.IBU);
+          $("#og").val(rcpdata.OG);
+          $("#fg").val(rcpdata.FG);
+          $("#batch_size").val(rcpdata.Litri);
+          $("#style").val(rcpdata.Stile);
+          input.trigger('input');
+          // scope.val(rcpdata.OG);
         },
-        error:function(request){
-          $("#output").html(request.responseText);
+        error:function(request) {
+          alert(responseText);
         },
       });
-/*
-      $.ajax({
-        type: "GET",
-        url: "calculations/plato",
-        data:{og:og},
-        success:function(ogData){
-          $("#ploutput").html(ogData);
-        },
-        error:function(request){
-          $("#ploutput").html(request.responseText);
-        }
-      });*/
-    }
-  });
+    });
   </script>

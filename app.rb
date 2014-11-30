@@ -49,8 +49,14 @@ get "/json/hops", :provides => :json do
 end
 
 get "/recipes" do
-  @recipe = Recipe.order("IdRicetta ASC")
+  @recipe = Recipe.order("id ASC")
   erb :"recipes/index"
+end
+
+get "/recipes/:id", :provides => :json do
+  id = params[:id]
+  @rcp_res = Recipe.find(id).to_json
+  erb :"json/recipe", :layout => false
 end
 
 get "/styles" do
@@ -61,6 +67,7 @@ end
 get "/calculations" do
   @styles = Styles.order("name ASC")
   @hops = Hops.order("name ASC")
+  @recipe = Recipe.order("id ASC")
   erb :"calculations/index"
 end
 
@@ -79,8 +86,8 @@ get "/calculations/ibu" do
   erb :"calculations/_ibu_result", :layout => false
 end
 
-get "/calculations/ibuog" do
-  o_gravity = params[:og].to_f;
-  @output = (((o_gravity - 1000) / o_gravity) * 261).to_i
-  erb :"calculations/_ibu_result", :layout => false
-end
+# get "/calculations/ibuog" do
+#   o_gravity = params[:og].to_f;
+#   @output = (((o_gravity - 1000) / o_gravity) * 261).to_i
+#   erb :"calculations/_ibu_result", :layout => false
+# end
