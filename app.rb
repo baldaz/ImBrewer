@@ -1,12 +1,21 @@
 #!/usr/bin/env ruby
 
 require "sinatra"
+require "sinatra/base"
 require "sinatra/activerecord"
 require "sinatra/contrib"
 require "sinatra/json"
 require "json"
+# require "less"
 require "./environments"
 require_relative "lib/calculations/bitterness"
+
+# class App < Sinatra::Base
+#   Less.paths << settings.views
+#   get 'css/:style.css' do
+#     less(params[:style].to_sym)
+#   end
+# end
 
 class Hops < ActiveRecord::Base
 end
@@ -35,6 +44,8 @@ helpers do
 end
 
 get "/" do
+  @crcp = Recipe.count
+  @chps = Hops.count
   erb :"home/index"
 end
 
@@ -51,6 +62,9 @@ end
 get "/recipes" do
   @recipe = Recipe.order("id ASC")
   erb :"recipes/index"
+end
+
+post "/recipes" do
 end
 
 get "/recipes/:id", :provides => :json do

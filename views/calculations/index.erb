@@ -19,6 +19,7 @@
       Plato: <span id="ploutput" class="resultset">{{ ((og - 1000)/ og) * 261 | number:1}}</span>
       Alcool: <span id="alcout" class="resultset">{{ (og - fg) / 7.5 | number:1 }} %</span>
       SRM: <span id="srmout" class="resultset">{{ (3 * (kg / 0.453)) / (batch / 4.54) | number:1 }}</span>
+      <!-- <span id="clr" class="resultset" style="background-color:{{ clrsrm }};" ng-controller="srmColor"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span> -->
     </div>
   </div>
   <div class="well bs-component">
@@ -36,7 +37,7 @@
             </select>
           </div>
         </div>
-      </fielset>
+      </fieldset>
     </form>
     <form class="form-horizontal" id="specform" action="" method="post" role="form">
       <fieldset>
@@ -106,15 +107,15 @@
             </div>
             <label for="hop_grams" class="col-xs-1 control-label">Grams</label>
             <div class="col-xs-1">
-              <input type="text" class="form-control input-sm" id="hop_grams">
+              <input type="text" class="form-control input-sm" id="hop_grams" name="hgrams[]">
             </div>
             <label for="alpha_acid" class="col-xs-1 control-label">Alpha acid (%)</label>
             <div class="col-xs-1">
-              <input type="text" class="form-control input-sm" id="alpha_acid">
+              <input type="text" class="form-control input-sm" id="alpha_acid" name="aa[]">
             </div>
             <label for="boil_time" class="col-xs-1 control-label">Boil time</label>
             <div class="col-xs-1">
-              <input type="text" class="form-control input-sm" id="boil_time">
+              <input type="text" class="form-control input-sm" id="boil_time" name="btime[]">
             </div>
             <div class="col-xs-1">
               <button class="btn btn-xs add_field_button_hop"><i class="fa fa-plus-circle"></i></button>
@@ -131,9 +132,9 @@
 
      $("#recipe").val(null);
 
-    gm = $("#hop_grams").val();
-    aa = $("#alpha_acid").val();
-    bt = $("#boil_time").val();
+    gm = $("input[name='hgrams[]']").val();
+    aa = $("input[name='aa[]']").val();
+    bt = $("input[name='btime[]']").val();
     bs = $("#batch_size").val();
     og = $("#og").val();
 
@@ -164,7 +165,7 @@
         contentType: "application/json",
         url: "/recipes/"+rcp,
         success:function(rcpdata) {
-          $("#output").html(rcpdata.IBU);
+          $("input[name='hgrams[]']").html(rcpdata.IBU);
           $("#og").val(rcpdata.OG);
           $("#fg").val(rcpdata.FG);
           $("#batch_size").val(rcpdata.Litri);
@@ -172,9 +173,23 @@
           input.trigger('input');
           // scope.val(rcpdata.OG);
         },
-        error:function(request) {
-          alert(responseText);
-        },
+        // error:function(request) {
+
+          // alert(request.responseText);
+        // },
       });
     });
+
+    // function srmColor($scope) {
+    //   var srm = (3 * ($scope.kg / 0.453) / ($scope.batch / 4.54));
+    //   srm = srm.toFixed(1);
+    //   console.log(srm);
+    //   console.log($scope.kg);
+    //   console.log($scope.batch);
+    //   if(srm >= 1 && srm <= 2.5) $scope.clrsrm = '#09cd87';
+    //   else if(srm >= 2.3 && srm <= 3.5) $scope.clrsrm = '#bbb';
+    //   else if(srm >= 3.5 && srm <= 5.5) $scope.clrsrm ='#3482ec';
+    //   else if(srm >= 5.5 && srm <= 10) $scope.clrsrm = '#00f';
+    //   else if(srm >= 10 && srm <= 18) $scope.clrsrm = '#f0f';
+    // }
   </script>

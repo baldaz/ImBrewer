@@ -1,7 +1,6 @@
 @import url("http://fonts.googleapis.com/css?family=Delius");
 
 *{ margin: 0; padding: 0; box-sizing: border-box;}
-
 html, body {height: 100%;}
 body {
   font-family: Delius;
@@ -9,17 +8,19 @@ body {
   background-position: center; background-attachment: fixed;
   color: #333; text-shadow: 0px 1px 1px #d4d4d4
 }
-body p {font-size: 0.8em; text-align: justify;margin: 1.5em 0;}
+body p {font-size:0.8em; text-align:justify; margin: 1.5em 0;}
 h5,h6 {font-family:Delius;}
 #footer p {text-align:center;}
+/*.homelist {
+  list-style-type:none; font-size: 12px;
+
+}
+.homelist>fieldset>legend {margin:0; font-size:14px;}*/
 .page-header {margin:0; padding:0; border:0;}
 .panel-title {font-size:inherit;}
 .panel-body {padding:6px;}
 .well {padding:15px;}
-.navbar-brand {
-  font-size:2em; font-weight:500;
-  text-shadow:2px 2px #bbb;
-}
+.navbar-brand {font-size:2em; font-weight:500; text-shadow:2px 2px #bbb;}
 .navbar.navbar-default {
   font-family:Delius; border-radius: 0;
   background-color: #f0f0f0;
@@ -29,20 +30,12 @@ h5,h6 {font-family:Delius;}
 .navbar.navbar-default a {transition:all .7s; text-shadow:1px 1px #bbb;}
 .navbar.navbar-default a.active{border-color:green;}
 #content {min-height: 75%}
-.tbl {
-  width:100%; margin-right:2%;
-  border-collapse:collapse;
-}
+.tbl {width:100%; margin-right:2%; border-collapse:collapse;}
 .tbl th {
-  border-bottom: 1px solid #777777;
-  text-align: left; padding: 0.5em;
-  background: transparent!important;
-  font-size: 0.7em;
+  border-bottom: 1px solid #777777; text-align: left; padding: 0.5em;
+  background: transparent!important;font-size: 0.7em;
 }
-.tbl td {
-    padding: 2px; font-weight: 400;
-    color: #333; font-size: 0.675em;
-}
+.tbl td {padding: 2px; font-weight: 400; color: #333; font-size: 0.675em;}
 .tbl tr:nth-child(2n+2) {background-color: rgba(20,110,170,0.2);}
 .tbl.recipes {width:15%;}
 .rcp-window {float:left; display:block; width:auto; height:auto;}
@@ -109,18 +102,12 @@ h1{
   padding:10px 8px; border-color:transparent;
   color:#666; cursor:text;
 }
-.ch {
-  display:block; float:left;
-  position:relative; background:white;
-}
+.ch {display:block; float:left;position:relative; background:white;}
 .ch:first-child{padding-left:2px;}
 .ch:last-child{padding-right:2px;}
 .focussed{pointer-events:none;}
 /* form recipes */
-#msform {
-  width:500px; margin:10px auto;
-  text-align:center; position:relative;
-}
+#msform {width:500px; margin:10px auto; text-align:center; position:relative;}
 #msform fieldset{
   background:rgba(255,255,255,0.7); border:0 none;
   border-radius:10px; box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
