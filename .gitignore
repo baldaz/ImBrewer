@@ -1,6 +1,6 @@
 *.db
 vendor
 .bundle
-public/css/bootstrap-theme.min.css
-public/css/bootstrap-theme.css
-public/css/bootstrap.css
+bootstrap-theme.min.css
+bootstrap-theme.css
+bootstrap.css
