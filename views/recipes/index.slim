@@ -1,0 +1,36 @@
+.col-lg-12
+  .page-header
+    h5 Recipes
+  #content
+    .bs-component
+      ul.nav.nav-tabs
+        li.active: a href='#list' data-toggle='tab' List
+        li: a href='#insert' data-toggle='tab' Insert
+      #myTabContent.tab-content
+        #insert.tab-pane.fade.active.in
+          table.tbl
+            thead
+              tr
+                th Name
+                th Style
+                th Type
+                th OG
+                th FG
+                th IBU
+                th Alcool
+                th Batch
+                th Boil time
+            tbody
+              - @recipe.each do |rcp|
+                tr
+                  td #{rcp.Nome}
+                  td #{rcp.Stile}
+                  td #{rcp.Tipologia}
+                  td #{rcp.OG}
+                  td #{rcp.FG}
+                  td #{rcp.IBU}
+                  td #{rcp.Alcool}
+                  td #{rcp.Litri} liters
+                  td #{rcp.TempoBollitura} min
+        #list.tab-pane.fade
+          form#msform
