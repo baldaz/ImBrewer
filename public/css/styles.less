@@ -1,0 +1,163 @@
+@import url("http://fonts.googleapis.com/css?family=Delius");
+
+*{ margin: 0; padding: 0; box-sizing: border-box;}
+html, body {height: 100%;}
+body {
+  font-family: Delius;
+  background: #f9f9f9 url('/images/hops-green.png') no-repeat;
+  background-position: center; background-attachment: fixed;
+  color: #333; text-shadow: 0px 1px 1px #d4d4d4
+}
+body p {font-size:0.8em; text-align:justify; margin: 1.5em 0;}
+h5,h6 {font-family:Delius;}
+#footer p {text-align:center;}
+/*.homelist {
+  list-style-type:none; font-size: 12px;
+
+}
+.homelist>fieldset>legend {margin:0; font-size:14px;}*/
+.page-header {margin:0; padding:0; border:0;}
+.panel-title {font-size:inherit;}
+.panel-body {padding:6px;}
+.well {padding:15px;}
+.navbar-brand {font-size:2em; font-weight:500; text-shadow:2px 2px #bbb;}
+.navbar.navbar-default {
+  font-family:Delius; border-radius: 0;
+  background-color: #f0f0f0;
+  box-shadow: 0px 6px 8px -2px #bbb;
+}
+.navbar.navbar-default i {display:block; float:left; width:20px; line-height:24px}
+.navbar.navbar-default a {transition:all .7s; text-shadow:1px 1px #bbb;}
+.navbar.navbar-default a.active{border-color:green;}
+#content {min-height: 75%}
+.tbl {width:100%; margin-right:2%; border-collapse:collapse;}
+.tbl th {
+  border-bottom: 1px solid #777777; text-align: left; padding: 0.5em;
+  background: transparent!important;font-size: 0.7em;
+}
+.tbl td {padding: 2px; font-weight: 400; color: #333; font-size: 0.675em;}
+.tbl tr:nth-child(2n+2) {background-color: rgba(20,110,170,0.2);}
+.tbl.recipes {width:15%;}
+.rcp-window {float:left; display:block; width:auto; height:auto;}
+::-webkit-scrollbar {width: 6px;}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px; border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px; border-radius: 10px;
+    background: rgba(0,0,0,0.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {background: rgba(0,0,0,0.4);}
+::-webkit-input-placeholder {font-size:0.9em; padding-left:5px; font-style:italic;}
+.well.bs-component {background-color:transparent;}
+.form-group {margin-bottom:8px;}
+select.input-sm, .input-sm {height:24px; padding:2px 10px;}
+.form-horizontal .control-label {padding-top:4px;}
+.btn {background-color:transparent; color:#4582EC;}
+legend {
+    font-weight: 500; color: rgb(20, 110, 170);
+    font-size: 0.8em; margin-bottom:12px;
+}
+label {
+    font-weight:700; font-size:.75em;
+    padding-left:10px; padding-right:10px;
+}
+input[type="number"], input[type="text"] {
+    width: 45%; font-size: .7em;
+    background-color: rgba(255,255,255,0.5)
+}
+#style, #fermentable_1, #fermentable_2, #fermentable_3, #fermentable_4, #fermentable_5,
+#hop_name, #hop_name_2, #hop_name_3, #hop_name_4, #hop_name5, #hop_name6 {
+    width:90%; font-size: 0.675em;
+    background-color: rgba(255,255,255,0.5)
+}
+.panel.panel-default {background: transparent;}
+.panel-default .panel-heading {background:rgba(20,110,170,0.3);}
+.panel-heading {padding:5px 12px;}
+.resultset {margin:0 30px 0 0; font-size: 0.8em; color: rgb(20,160,70);}
+/* login form */
+main {
+  width:500px; margin:10px auto; padding-bottom:10px;
+  background:rgba(255,255,255,0.7); border-radius:5px; overflow:hidden;
+  box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
+}
+h1{
+  font-size:24px; font-weight:bold;
+  background:#F0F0F0; color:#4582EC;
+  text-align:center;font-family:Delius;
+  padding:20px 10px; margin-bottom:40px;
+}
+.flp{padding:0 50px;}
+.flp div{position:relative; margin-bottom:30px;}
+.flp input,.flp label{
+  width:400px; display:block;
+  font:inherit; font-size:16px; line-height:14px;
+  height: 36px; border:1px solid #999;
+}
+.flp input{padding:10px; outline:none; border-radius:3px;}
+.flp label{
+  position:absolute; left:0; top:0;
+  padding:10px 8px; border-color:transparent;
+  color:#666; cursor:text;
+}
+.ch {display:block; float:left;position:relative; background:white;}
+.ch:first-child{padding-left:2px;}
+.ch:last-child{padding-right:2px;}
+.focussed{pointer-events:none;}
+/* form recipes */
+#msform {width:500px; margin:10px auto; text-align:center; position:relative;}
+#msform fieldset{
+  background:rgba(255,255,255,0.7); border:0 none;
+  border-radius:10px; box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
+  padding:20px 30px; box-sizing:border-box; width:80%;
+  margin:0 10%; position:absolute;
+}
+#msform fieldset:not(:first-of-type) {display:none;}
+#msform input {
+  padding:5px; border:1px solid #ccc;
+  border-radius:3px; margin-bottom:10px;
+  width:100%; box-sizing:border-box;
+  font-family:Delius; color:#2C3E50; font-size:13px;
+}
+#msform .action-button {
+  width:100px; background:#4582EC;
+  font-weight:bold; color:white;
+  border:0 none; border-radius:5px;
+  cursor:pointer; padding:10px 5px;
+  margin:10px 5px;
+}
+#msform .action-button:hover, #msform .action-button:focus {
+  box-shadow:0 0 0 2px white, 0 0 0 3px #4582EC;
+}
+.fs-title {
+  font-size:15px; text-transform:uppercase;
+  color:#4582EC; margin-bottom:5px; font-family:Delius;
+}
+.fs-subtitle {
+  font-weight:normal; font-size:13px; color:#666;
+  margin-bottom:15px; font-family:Delius;
+}
+#progressbar {margin-bottom:15px; overflow:hidden; counter-reset:step;}
+#progressbar li {
+  list-style-type:none; color:#4582EC;
+  text-transform:uppercase; font-size:9px;
+  width:33.33%; float:left; position:relative;
+}
+#progressbar li:before {
+  content:counter(step);
+  counter-increment:step;
+  width:20px; line-height:20px; display:block;
+  font-size:10px; color:#333; background:#F0F0F0;
+  border-radius:3px; margin:0 auto 5px auto;
+}
+#progressbar li:after {
+  content:''; width:100%; height:2px;
+  background:#F0F0F0; position:absolute;
+  left:-50%; top:9px; z-index:-1; /* behind numbers */
+}
+#progressbar li:first-child:after {content:none;}
+#progressbar li.pbactive:before, #progressbar li.pbactive.after {
+  background:#4582EC; color:white;
+}
