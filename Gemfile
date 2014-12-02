@@ -6,6 +6,11 @@ gem "sinatra"
 gem "activerecord"
 gem "sinatra-activerecord"
 gem "sinatra-contrib"
+gem 'sinatra-assetpack'
+gem 'json'
+gem 'less'
+gem 'slim'
+gem 'therubyracer'
 
 group :development do
   gem "sqlite3"

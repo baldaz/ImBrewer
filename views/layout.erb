@@ -7,13 +7,14 @@
     <meta name="description" content="Homebrewing charts, recipes and calculations">
     <meta name="author" content="Baldaz">
     <title><%= title %></title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/css/styles.css" rel="stylesheet">
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-    <script src="http://thecodeplayer.com/u/js/jquery.easing.min.js"></script>
-    <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <!-- <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <!-- <link href="/css/styles.css" rel="stylesheet"> -->
+    <%= css :application %>
+    <!-- // <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    // <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    // <script src="http://thecodeplayer.com/u/js/jquery.easing.min.js"></script>
+    // <script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script> -->
   </head>
   <body>
     <div class="navbar navbar-default">
@@ -36,8 +37,8 @@
       <p>&copy; Brewby&trade; 2014</p>
     </div>
 <!--    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-    <script src="js/bootstrap.js"></script>
-    <script src="js/script.js"></script>
+    <!-- // <script src="js/bootstrap.js"></script>
+    // <script src="js/script.js"></script> -->
     <script>
       function recipeController($scope,$http) {
         $http.get('recipe_JSON').succes(function(response){recipe = response;});
