@@ -7,7 +7,7 @@
         li.active: a href='#list' data-toggle='tab' List
         li: a href='#insert' data-toggle='tab' Insert
       #myTabContent.tab-content
-        #insert.tab-pane.fade.active.in
+        #list.tab-pane.fade.active.in
           table.tbl
             thead
               tr
@@ -22,15 +22,45 @@
                 th Boil time
             tbody
               - @recipe.each do |rcp|
-                tr
-                  td #{rcp.Nome}
-                  td #{rcp.Stile}
-                  td #{rcp.Tipologia}
-                  td #{rcp.OG}
-                  td #{rcp.FG}
-                  td #{rcp.IBU}
-                  td #{rcp.Alcool}
-                  td #{rcp.Litri} liters
-                  td #{rcp.TempoBollitura} min
-        #list.tab-pane.fade
+                  tr
+                    td #{rcp.Nome}
+                    td #{rcp.Stile}
+                    td #{rcp.Tipologia}
+                    td #{rcp.OG}
+                    td #{rcp.FG}
+                    td #{rcp.IBU}
+                    td #{rcp.Alcool}
+                    td #{rcp.Litri} liters
+                    td #{rcp.TempoBollitura} min
+        #insert.tab-pane.fade
           form#msform
+            ul#progressbar
+              li.pbactive Recipe specifications
+              li Ingredients
+              li Phases
+            fieldset
+              h2.fs-title Insert specifications
+              h3.fs-subtitle Step 1
+              input#name type="text" name="name" placeholder="Recipe name"
+              input type="text" name="ibu" placeholder="Ibu"
+              input type="text" name="og" placeholder="Original Gravity"
+              input type="text" name="alcool" placeholder="Alcool %"
+              input type="text" name="batch" placeholder="Batch size"
+              input type="button" name="next" class="next action-button" value="next"
+            fieldset
+              h2.fs-title Insert ingredients
+              h3.fs-subtitle Step 2
+              input type="text" name="malt" placeholder="Malt name"
+              input type="text" name="hop" placeholder="Hop name"
+              input type="text" name="yeast" placeholder="Yeast name"
+              input type="button" name="previous" class="previous action-button" value="previous"
+              input type="button" name="next" class="next action-button" value="next"
+            fieldset
+              h2.fs-title Insert phases
+              h3.fs-subtitle Step 3
+              input type="text" name="mash" placeholder="Mashing phase 1"
+              input type="text" name="timemash" placeholder="Time mashing phase 1"
+              input type="text" name="hopping" placeholder="Hopping phase 1"
+              input type="text" name="timehop" placeholder="Time hopping phase 1"
+              input type="button" name="previous" class="previous action-button" value="previous"
+              input type="submit" name="submit" class="submit action-button" value="submit"

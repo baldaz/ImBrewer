@@ -1,0 +1,27 @@
+.col-lg-12
+  .page-header
+    h5 Ingredients
+  #content
+    .bs-component
+      ul.nav.nav-tabs
+        li.active: a href='#hops' data-toggle='tab' Hops
+        li: a href='#yeasts' data-toggle='tab' Yeasts
+        li: a href='#fermentables' data-toggle='tab' Fermentables
+      #myTabContent.tab-content
+        #hops.tab-pane.active.fade.in
+          table.tbl
+            thead
+              tr
+                th Name
+                th Country
+                th Alpha acids
+            tbody
+              - @hops.each do |h|
+                  tr
+                    td #{h.name}
+                    td #{h.country}
+                    td #{h.aa} %
+        #yeasts.tab-pane.fade
+          p Yeasts here!!
+        #fermentables.tab-pane.fade
+          p fermentables here!!

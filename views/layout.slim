@@ -5,8 +5,8 @@ html
   meta name="viewport" content="width=device-width, initial-scale=1.0"
   meta name="description" content="Homebrewing charts, recipes and calculations"
   meta name="author" content="Codep"
-  ==css :application
   link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"
+  ==css :application
   script src="//code.jquery.com/jquery-1.11.0.min.js"
   script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"
   script src="http://thecodeplayer.com/u/js/jquery.easing.min.js"
@@ -15,7 +15,7 @@ html
   body
     div class='navbar navbar-default'
       div class='container'
-        a href='/' class='navbar-brand' Brewers Cookbook
+        a href='/' class='navbar-brand' ImBrewer
         button class='navbar-toggle' data-toggle='collapse' data-target ='.navHeaderCollapse'
           span class='icon-bar'
           span class='icon-bar'
@@ -23,7 +23,7 @@ html
         div class='collapse navbar-collapse navHeaderCollapse'
           ul class='nav navbar-nav navbar-right'
             li class="#{ if @page == 'home' then 'active' end }": a href='/' <i class="fa fa-home"></i>Home
-            li class="#{ if @page == 'recipes' then 'active' end }": a href="/recipes" <i class="fa fa-plus-circle"></i>Recipes
+            li class="#{ if @page == 'recipes' then 'active' end }": a href="/recipes" <i class="fa fa-plus-circle"></i>Cookbook
             li class="#{ if @page == 'ingredients' then 'active' end }": a href="/ingredients" <i class="fa fa-folder-open"></i>Ingredients
             li class="#{ if @page == 'styles' then 'active' end }": a href="/styles" <i class="fa fa-beer"></i>Styles
             li class="#{ if @page == 'calc' then 'active' end }": a href="/calculations" <i class="fa fa-cog"></i>Calculations

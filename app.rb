@@ -73,8 +73,9 @@ class App < Sinatra::Base
   end
 
   get "/ingredients" do
+    tab('ingredients')
     @hops = Hops.order("name ASC")
-    erb :"ingredients/index"
+    slim :"ingredients/index"
   end
 
   get "/json/hops", :provides => :json do

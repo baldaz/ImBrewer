@@ -1,6 +1,3 @@
 *.db
 vendor
 .bundle
-bootstrap-theme.min.css
-bootstrap-theme.css
-bootstrap.css
