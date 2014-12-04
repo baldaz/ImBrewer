@@ -1,5 +1,3 @@
-
-
 $(document).ready(function() {
 
     var max_fields = 10; //maximum input boxes allowed
@@ -19,7 +17,7 @@ $(document).ready(function() {
 
     $(m_wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); x--;
-    })
+    });
 
     var h = 1; //initlal text box count
     select="";
@@ -45,11 +43,11 @@ $(document).ready(function() {
               h++; //text box increment
               $(h_wrapper).append('<div class="form-group"><label for="hop_name_'+h+'" class="col-xs-1 control-label">Hop #'+h+'</label><div class="col-xs-2"><select class="form-control input-sm" id="hop_name_'+h+'" name="hop_name_[]">'+select+'</select></div><label for="hop_grams_'+h+'" class="col-xs-1 control-label">Grams</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="hop_grams_'+h+'" name="hgrams[]" /></div><label for="alpha_acid_'+h+'" class="col-xs-1 control-label">Alpha acid</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="alpha_acid_'+h+'" name="aa[]"></div><label for="boil_time_'+h+'" class="col-xs-1 control-label">Boil time</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="boil_time_'+h+'" name="btime[]"></div><a href="#" class="remove_field">Remove</a></div>'); //add input box
           }
-    });
+        });
 
     $(h_wrapper).on("click",".remove_field", function(e){ //user click on remove text
         e.preventDefault(); $(this).parent('div').remove(); h--;
-    })
+    });
 
   // login form
 
@@ -192,14 +190,14 @@ $(document).ready(function() {
         // },
       });
     });
-
+    var nav = '<nav><ul class="pager"><li class="previous"><a href="recipes#list"><span aria-hidden="true">&larr;</span> Glossary</a></li><li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li></ul></nav>';
     $('#myTabContent #list  td a').click(function() {
       var id = $(this).attr('id');
       $.ajax({
         type: 'POST',
         url : '/recipes/' + id,
         success:function(rcpdata) {
-          $('#myTabContent').html(rcpdata.IBU);
+          $('#myTabContent').html(nav + '<h6>' + rcpdata.Nome + '</h6><p>Ibu: ' + rcpdata.IBU);
         },
         error:function(req) {
           $('#myTabContent').html(req.responseText);

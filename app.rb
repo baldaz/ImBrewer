@@ -52,15 +52,15 @@ class App < Sinatra::Base
         "Brewby"
       end
     end
-
-    def ibu_result
-      erb :"calculations/_ibu_result"
-    end
-
-    def recipe_JSON
-      @recipe = Recipe.order("IdRicetta ASC")
-      json :@recipe
-    end
+    #
+    # def ibu_result
+    #   erb :"calculations/_ibu_result"
+    # end
+    #
+    # def recipe_JSON
+    #   @recipe = Recipe.order("IdRicetta ASC")
+    #   json :@recipe
+    # end
   end
 
   after { ActiveRecord::Base.connection.close } # close db connection after every request, solve 5000 ms issue connection
