@@ -32,7 +32,7 @@ class App < Sinatra::Base
     serve '/css', :from => css_dir       # Default
 
     css :application, [
-      '/css/bootstrap.min.css',
+      # '/css/bootstrap.min.css',
       '/css/styles.css'
     ]
 

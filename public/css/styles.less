@@ -1,9 +1,9 @@
 @import url("http://fonts.googleapis.com/css?family=Delius");
-
+@primary_color: #333333;
 *{ margin: 0; padding: 0; box-sizing: border-box;}
 html, body {height: 100%;}
 body {
-  font-family: Delius;
+  font-family: Delius; font-size:15px;
   background: #f9f9f9 url('/images/hops-green.png') no-repeat;
   background-position: center; background-attachment: fixed;
   color: #333; text-shadow: 0px 1px 1px #d4d4d4
@@ -20,14 +20,16 @@ h5,h6 {font-family:Delius;}
 .panel-title {font-size:inherit;}
 .panel-body {padding:6px;}
 .well {padding:15px;}
-.navbar-brand {font-size:2em; font-weight:500; text-shadow:2px 2px #bbb;}
+.nav.nav-tabs li a {color:#777;}
+.nav.nav-tabs li.active a {color:@primary_color!important;}
+.navbar-brand {font-size:2em; font-weight:500; text-shadow:2px 2px #bbb; color:@primary_color;}
 .navbar.navbar-default {
   font-family:Delius; border-radius: 0;
   background-color: #f0f0f0;
   box-shadow: 0px 6px 8px -2px #bbb;
 }
 .navbar.navbar-default i {display:block; float:left; width:20px; line-height:24px}
-.navbar.navbar-default a {transition:all .7s; text-shadow:1px 1px #bbb;}
+.navbar.navbar-default a {transition:all .7s; text-shadow:1px 1px #bbb; color:@primary_color;}
 .navbar.navbar-default a.active{border-color:green;}
 #content {min-height: 75%}
 .tbl {width:100%; margin-right:2%; border-collapse:collapse;}
@@ -36,7 +38,7 @@ h5,h6 {font-family:Delius;}
   background: transparent!important;font-size: 0.7em;
 }
 .tbl td {padding: 2px; font-weight: 400; color: #333; font-size: 0.675em;}
-.tbl tr:nth-child(2n+2) {background-color: rgba(20,110,170,0.2);}
+.tbl tr:nth-child(2n+2) {background-color: rgba(51,51,51,0.2);}
 .tbl.recipes {width:15%;}
 .rcp-window {float:left; display:block; width:auto; height:auto;}
 ::-webkit-scrollbar {width: 6px;}
@@ -55,9 +57,9 @@ h5,h6 {font-family:Delius;}
 .form-group {margin-bottom:8px;}
 select.input-sm, .input-sm {height:24px; padding:2px 10px;}
 .form-horizontal .control-label {padding-top:4px;}
-.btn {background-color:transparent; color:#4582EC;}
+.btn {background-color:transparent; color:@primary_color;}
 legend {
-    font-weight: 500; color: rgb(20, 110, 170);
+    font-weight: 500; color: @primary_color;
     font-size: 0.8em; margin-bottom:12px;
 }
 label {
@@ -74,7 +76,7 @@ input[type="number"], input[type="text"] {
     background-color: rgba(255,255,255,0.5)
 }
 .panel.panel-default {background: transparent;}
-.panel-default .panel-heading {background:rgba(20,110,170,0.3);}
+.panel-default .panel-heading {background:rgba(51,51,51,0.3);}
 .panel-heading {padding:5px 12px;}
 .resultset {margin:0 30px 0 0; font-size: 0.8em; color: rgb(20,160,70);}
 /* login form */
@@ -85,7 +87,7 @@ main {
 }
 h1{
   font-size:24px; font-weight:bold;
-  background:#F0F0F0; color:#4582EC;
+  background:#F0F0F0; color:@primary_color;
   text-align:center;font-family:Delius;
   padding:20px 10px; margin-bottom:40px;
 }
@@ -122,18 +124,18 @@ h1{
   font-family:Delius; color:#2C3E50; font-size:13px;
 }
 #msform .action-button {
-  width:100px; background:#4582EC;
+  width:100px; background:@primary_color;
   font-weight:bold; color:white;
   border:0 none; border-radius:5px;
   cursor:pointer; padding:10px 5px;
   margin:10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
-  box-shadow:0 0 0 2px white, 0 0 0 3px #4582EC;
+  box-shadow:0 0 0 2px white, 0 0 0 3px @primary_color;
 }
 .fs-title {
   font-size:15px; text-transform:uppercase;
-  color:#4582EC; margin-bottom:5px; font-family:Delius;
+  color:@primary_color; margin-bottom:5px; font-family:Delius;
 }
 .fs-subtitle {
   font-weight:normal; font-size:13px; color:#666;
@@ -141,7 +143,7 @@ h1{
 }
 #progressbar {margin-bottom:15px; overflow:hidden; counter-reset:step;}
 #progressbar li {
-  list-style-type:none; color:#4582EC;
+  list-style-type:none; color:@primary_color;
   text-transform:uppercase; font-size:9px;
   width:33.33%; float:left; position:relative;
 }
@@ -159,5 +161,5 @@ h1{
 }
 #progressbar li:first-child:after {content:none;}
 #progressbar li.pbactive:before, #progressbar li.pbactive.after {
-  background:#4582EC; color:white;
+  background:@primary_color; color:white;
 }
