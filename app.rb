@@ -94,6 +94,7 @@ class App < Sinatra::Base
 
   post "/recipes/:id", :provides => :json do
     id = params[:id]
+    redirect '/recipes' unless id != 0
     Recipe.find(id).to_json
   end
 

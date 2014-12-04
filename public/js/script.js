@@ -21,14 +21,11 @@ $(document).ready(function() {
 
     var h = 1; //initlal text box count
     select="";
-      var jh = 0;
+    var jh = 0;
       $.ajax({
-          dataType: 'json',
-          contentType: 'application/json',
           type: "POST",
           url: "/json/hops",
           success:function(rubydata){
-            jh = rubydata;
             $.each(rubydata, function(key, value){
               select += '<option value='+key+'>'+value.name+'</option>';
             })
@@ -190,9 +187,12 @@ $(document).ready(function() {
         // },
       });
     });
-    var nav = '<nav><ul class="pager"><li class="previous"><a href="recipes#list"><span aria-hidden="true">&larr;</span> Glossary</a></li><li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li></ul></nav>';
-    $('#myTabContent #list  td a').click(function() {
+    // using attach event handler to bubblin propagation
+    $('#myTabContent').on('click','a', function(e) {
+      e.preventDefault();
       var id = $(this).attr('id');
+      var idd = parseInt(id) + 1;
+      var nav = '<nav><ul class="pager"><li class="previous"><a href="recipes"><span aria-hidden="true">&larr;</span> Glossary</a></li><li class="next"><a href="#" id=' + idd +'>Newer <span aria-hidden="true">&rarr;</span></a></li></ul></nav>';
       $.ajax({
         type: 'POST',
         url : '/recipes/' + id,
@@ -200,9 +200,9 @@ $(document).ready(function() {
           $('#myTabContent').html(nav + '<h6>' + rcpdata.Nome + '</h6><p>Ibu: ' + rcpdata.IBU);
         },
         error:function(req) {
-          $('#myTabContent').html(req.responseText);
+          // $('#myTabContent').html('req.responseText');
+          window.location = '/recipes'
         }
       });
     });
-
 });
