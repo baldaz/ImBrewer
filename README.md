@@ -1,1 +1,5 @@
-Didactical home-brewing application developed in ruby sinatra.
+# ImBrewer
+Didactical home-brewing application, features:
+* Ruby Sinatra
+* Less
+* Slim
