@@ -11,11 +11,6 @@ body {
 body p {font-size:0.8em; text-align:justify; margin: 1.5em 0;}
 h5,h6 {font-family:Delius;}
 #footer p {text-align:center;}
-/*.homelist {
-  list-style-type:none; font-size: 12px;
-
-}
-.homelist>fieldset>legend {margin:0; font-size:14px;}*/
 .page-header {margin:0; padding:0; border:0;}
 .panel-title {font-size:inherit;}
 .panel-body {padding:6px;}
@@ -24,8 +19,7 @@ h5,h6 {font-family:Delius;}
 .nav.nav-tabs li.active a {color:@primary_color!important;}
 .navbar-brand {font-size:2em; font-weight:500; text-shadow:2px 2px #bbb; color:@primary_color;}
 .navbar.navbar-default {
-  font-family:Delius; border-radius: 0;
-  background-color: #f0f0f0;
+  font-family:Delius; border-radius: 0; background-color: #f0f0f0;
   box-shadow: 0px 6px 8px -2px #bbb;
 }
 .navbar.navbar-default i {display:block; float:left; width:20px; line-height:24px}
@@ -58,14 +52,9 @@ h5,h6 {font-family:Delius;}
 select.input-sm, .input-sm {height:24px; padding:2px 10px;}
 .form-horizontal .control-label {padding-top:4px;}
 .btn {background-color:transparent; color:@primary_color;}
-legend {
-    font-weight: 500; color: @primary_color;
-    font-size: 0.8em; margin-bottom:12px;
-}
+legend {font-weight: 500; color: @primary_color; font-size: 0.8em; margin-bottom:12px;}
 label {
-    font-weight:700; font-size:.75em;
-    padding-left:10px; padding-right:10px;
-}
+    font-weight:700; font-size:.75em; padding-left:10px; padding-right:10px;}
 input[type="number"], input[type="text"] {
     width: 45%; font-size: .7em;
     background-color: rgba(255,255,255,0.5)
@@ -86,23 +75,19 @@ main {
   box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
 }
 h1{
-  font-size:24px; font-weight:bold;
-  background:#F0F0F0; color:@primary_color;
-  text-align:center;font-family:Delius;
-  padding:20px 10px; margin-bottom:40px;
+  font-size:24px; font-weight:bold; background:#F0F0F0; color:@primary_color;
+  text-align:center;font-family:Delius; padding:20px 10px; margin-bottom:40px;
 }
 .flp{padding:0 50px;}
 .flp div{position:relative; margin-bottom:30px;}
 .flp input,.flp label{
-  width:400px; display:block;
-  font:inherit; font-size:16px; line-height:14px;
-  height: 36px; border:1px solid #999;
+  display:block; font:inherit; font-size:16px; line-height:14px;
+  width:400px; height: 36px; border:1px solid #999;
 }
 .flp input{padding:10px; outline:none; border-radius:3px;}
 .flp label{
-  position:absolute; left:0; top:0;
+  position:absolute; left:0; top:0; color:#666; cursor:text;
   padding:10px 8px; border-color:transparent;
-  color:#666; cursor:text;
 }
 .ch {display:block; float:left;position:relative; background:white;}
 .ch:first-child{padding-left:2px;}
@@ -125,10 +110,8 @@ h1{
 }
 #msform .action-button {
   width:100px; background:@primary_color;
-  font-weight:bold; color:white;
-  border:0 none; border-radius:5px;
-  cursor:pointer; padding:10px 5px;
-  margin:10px 5px;
+  font-weight:bold; color:white; border:0 none; border-radius:5px;
+  cursor:pointer; padding:10px 5px; margin:10px 5px;
 }
 #msform .action-button:hover, #msform .action-button:focus {
   box-shadow:0 0 0 2px white, 0 0 0 3px @primary_color;
@@ -148,8 +131,7 @@ h1{
   width:33.33%; float:left; position:relative;
 }
 #progressbar li:before {
-  content:counter(step);
-  counter-increment:step;
+  content:counter(step); counter-increment:step;
   width:20px; line-height:20px; display:block;
   font-size:10px; color:#333; background:#F0F0F0;
   border-radius:3px; margin:0 auto 5px auto;
