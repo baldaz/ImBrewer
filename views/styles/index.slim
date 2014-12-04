@@ -1,0 +1,20 @@
+.col-lg-12
+  .page-header
+    h5 Recipes
+  #content
+    table.tbl
+      thead
+        tr
+          th Style
+          th OG
+          th FG
+          th IBU
+          th ABV
+      tbody
+      - @styles.each do |s|
+        tr
+          td #{s.name}
+          td #{s.og}
+          td #{s.fg}
+          td #{s.ibu}
+          td #{s.abv}

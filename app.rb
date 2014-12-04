@@ -26,8 +26,9 @@ class App < Sinatra::Base
   register Sinatra::AssetPack
   assets do
     css_dir = 'public/css'
+    js_dir = 'public/js'
 
-    serve '/js',  :from => 'public/js'        # Default
+    serve '/js',  :from => js_dir        # Default
     serve '/css', :from => css_dir       # Default
 
     css :application, [
@@ -62,7 +63,7 @@ class App < Sinatra::Base
     end
   end
 
-  after { ActiveRecord::Base.connection.close }
+  after { ActiveRecord::Base.connection.close } # close db connection after every request, solve 5000 ms issue connection
 
   get "/" do
     tab('home')
@@ -78,9 +79,8 @@ class App < Sinatra::Base
     slim :"ingredients/index"
   end
 
-  get "/json/hops", :provides => :json do
-    @hops_res = Hops.order("name ASC").to_json
-    erb :"json/hops", :layout => false
+  post "/json/hops", :provides => :json do
+    Hops.order("name ASC").to_json
   end
 
   get "/recipes" do
@@ -92,25 +92,26 @@ class App < Sinatra::Base
   post "/recipes" do
   end
 
-  get "/recipes/:id", :provides => :json do
+  post "/recipes/:id", :provides => :json do
     id = params[:id]
-    @rcp_res = Recipe.find(id).to_json
-    erb :"json/recipe", :layout => false
+    Recipe.find(id).to_json
   end
 
   get "/styles" do
+    tab('styles')
     @styles = Styles.order("name ASC")
-    erb :"styles/index"
+    slim :"styles/index"
   end
 
   get "/calculations" do
+    tab('calculations')
     @styles = Styles.order("name ASC")
     @hops = Hops.order("name ASC")
     @recipe = Recipe.order("id ASC")
-    erb :"calculations/index"
+    slim :"calculations/index"
   end
 
-  get "/calculations/ibu" do
+  post "/calculations/ibu", :provides => :json do
     hop_grams = params[:hop_grams].to_f
     alpha_acid_percentage = params[:alpha_acid].to_f
     boil_time = params[:boil_time].to_i
@@ -121,13 +122,8 @@ class App < Sinatra::Base
     btns = Bitterness.new(hop_grams, boil_time, alpha_acid_percentage, batch_liters, original_gravity)
     rg = Rager.new(btns)
     ts = Tinseth.new(btns)
-    @output = ((rg.ibu.round(1).to_i / 100) + ts.ibu.round(1).to_i) / 2
-    erb :"calculations/_ibu_result", :layout => false
+    output = ((rg.ibu.round(1).to_i / 100) + ts.ibu.round(1).to_i) / 2
+    output.to_json # rack error status > 100 as integer
   end
 
-  # get "/calculations/ibuog" do
-  #   o_gravity = params[:og].to_f;
-  #   @output = (((o_gravity - 1000) / o_gravity) * 261).to_i
-  #   erb :"calculations/_ibu_result", :layout => false
-  # end
 end

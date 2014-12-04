@@ -1,0 +1,83 @@
+.col-lg-12.col-md-12.col-xs-12 data-ng-app='' data-ng-init='og=1010;fg=1005;batch=23;kg=5;'
+  .page-header
+    h5 Calculations
+  .panel.panel-default
+    .panel-heading
+      h6.panel-title Results for <span id='rcpname'></span>
+    .panel-body
+      |IBU:
+      span#output.resultset
+      |Plato:
+      <span id='ploutput' class='resultset'> {{ ((og - 1000)/ og) * 261 | number:1}}</span>
+      |Alcool:
+      <span id='alcout' class='resultset'> {{ (og - fg) / 7.5 | number:1 }} %</span>
+      |SRM:
+      <span id='srmout' class='resultset'> {{ (3 * (kg / 0.453)) / (batch / 4.54) | number:1 }}</span>
+  .well.bs-component
+    form#rcpform.form-horizontal action='' method='post' role='form'
+      fieldset
+        legend Recipe
+        .form-group
+          label.col-xs-1.control-label for='recipe' Recipe
+          .col-lg-3.col-md-3.col-xs-3
+            select#recipe.form-control.input-sm
+              option value='' generic recipe
+              - @recipe.each do |r|
+                  option value='#{r.id}' #{r.Nome}
+    form#specform.form-horizontal action='' method='post' role='form'
+      fieldset
+        legend Specifications
+        .form-group
+          label.col-xs-1.control-label for='style' Style
+          .col-xs-2
+            select#style.form-control.input-sm
+                - @styles.each do |st|
+                  option value='#{st.name}' #{st.name}
+          label.col-xs-1.control-label for='batch_size' Batch
+          .col-xs-2
+            input#batch_size.form-control.input-sm type='number' min='23' max='10000' value='23' ng-model='batch'
+          label.col-xs-1.control-label for='efficiency' Efficiency (%)
+          .col-xs-2
+            input#efficiency.form-control.input-sm type='number' min='50' max='95' value='70'
+        .form-group
+          label.col-xs-1.control-label for='og' OG
+          .col-xs-2
+            input#og.form-control.input-sm type='number' min='1000' max='1100' value='1010' ng-model='og'
+          label.col-xs-1.control-label for='fg' FG
+          .col-xs-2
+            input#fg.form-control.input-sm type='number' min='1000' max='1100' value='1000' ng-model='fg'
+      fieldset
+        legend Grain bill
+        .input_fields_wrap_malt
+          .form-group
+            label.col-xs-1.control-label for='fermentable_1' Malt
+            .col-xs-2
+              select#fermentable_1.form-control.input-sm
+                option Pilsener
+                option Cara pils
+                option Flaked corn
+            label.col-xs-1.control-label for='kg_fermentable_1' Kg
+            .col-xs-2
+              input#kg_fermentable_1.form-control.input-sm type='text' ng-model='kg'
+            .col-xs-1
+              button.btn.btn-xs.add_field_button_malt: i.fa.fa-plus-circle
+      fieldset
+        legend Hop bill
+        .input_fields_wrap_hop
+          .form-group
+            label.col-xs-1.control-label for='hop_name' Hop
+            .col-xs-2
+              select#hop_name.form-control.input-sm
+                - @hops.each do |hop|
+                  option value='#{hop.name}' #{hop.name}
+            label.col-xs-1.control-label for='hop_grams' Grams
+            .col-xs-1
+              input#hop_grams.form-control.input-sm type='text' name='hgrams[]'
+            label.col-xs-1.control-label for='alpha_acid' Alpha acid (%)
+            .col-xs-1
+              input#alpha_acid.form-control.input-sm type='text' name='aa[]'
+            label.col-xs-1.control-label for='boil_time' Boil time
+            .col-xs-1
+              input#boil_time.form-control.input-sm type='text' name='btime[]'
+            .col-xs-1
+              button.btn.btn-xs.add_field_button_hop: i.fa.fa-plus-circle
