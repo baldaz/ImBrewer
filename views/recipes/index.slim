@@ -23,7 +23,7 @@
             tbody
               - @recipe.each do |rcp|
                   tr
-                    td #{rcp.Nome}
+                    td: a href='#' id='#{rcp.id}' #{rcp.Nome}
                     td #{rcp.Stile}
                     td #{rcp.Tipologia}
                     td #{rcp.OG}
