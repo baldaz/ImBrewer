@@ -119,9 +119,8 @@ class App < Sinatra::Base
     original_gravity = params[:og].to_f
     final_gravity = params[:fg].to_f
 
-    btns = Bitterness.new(hop_grams, boil_time, alpha_acid_percentage, batch_liters, original_gravity)
-    rg = Rager.new(btns)
-    ts = Tinseth.new(btns)
+    rg = Rager.new(hop_grams, boil_time, alpha_acid_percentage, batch_liters, original_gravity)
+    ts = Tinseth.new(hop_grams, boil_time, alpha_acid_percentage, batch_liters, original_gravity)
     output = ((rg.ibu.round(1).to_i / 100) + ts.ibu.round(1).to_i) / 2
     output.to_json # rack error status > 100 as integer
   end
