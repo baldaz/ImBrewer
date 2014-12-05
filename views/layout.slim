@@ -14,17 +14,17 @@ html
   script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"
 
   body
-    div class='navbar navbar-default'
-      div class='container'
+    .navbar.navbar-default
+      .container
         a href='/' class='navbar-brand' ImBrewer
-        button class='navbar-toggle' data-toggle='collapse' data-target ='.navHeaderCollapse'
-          span class='icon-bar'
-          span class='icon-bar'
-          span class='icon-bar'
-        div class='collapse navbar-collapse navHeaderCollapse'
-          ul class='nav navbar-nav navbar-right'
+        button.navbar-toggle data-toggle='collapse' data-target ='.navHeaderCollapse'
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        .collapse.navbar-collapse.navHeaderCollapse
+          .nav.navbar-nav.navbar-right
             li class="#{ if @page == 'home' then 'active' end }": a href='/' <i class="fa fa-home"></i>Home
-            li class="#{ if @page == 'recipes' then 'active' end }": a href="/recipes" <i class="fa fa-plus-circle"></i>Cookbook
+            li class="#{ if @page == 'recipes' then 'active' end }": a href="/recipes" <i class="fa fa-bookmark"></i>Cookbook
             li class="#{ if @page == 'ingredients' then 'active' end }": a href="/ingredients" <i class="fa fa-folder-open"></i>Ingredients
             li class="#{ if @page == 'styles' then 'active' end }": a href="/styles" <i class="fa fa-beer"></i>Styles
             li class="#{ if @page == 'calculations' then 'active' end }": a href="/calculations" <i class="fa fa-cog"></i>Calculations

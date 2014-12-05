@@ -6,7 +6,7 @@
 require "sinatra/base"
 require "sinatra/assetpack"
 require "sinatra/activerecord"
-require "sinatra/contrib"
+# require "sinatra/contrib"
 # require "sinatra/json"
 # require "json"
 # require "less"
@@ -16,9 +16,20 @@ require_relative "lib/calculations/bitterness"
 
 class Hops < ActiveRecord::Base
 end
+
 class Styles < ActiveRecord::Base
 end
+
 class Recipe < ActiveRecord::Base
+  validates :name, presence: true
+  validates :style, presence: true
+  validates :og, presence: true
+  validates :fg, presence: true
+  validates :abv, presence: true
+  validates :ibu, presence: true
+  validates :batch, presence: true
+  validates :btime, presence: true
+  validates :dhop, presence: true
 end
 
 class App < Sinatra::Base
@@ -69,7 +80,6 @@ class App < Sinatra::Base
     tab('home')
     @crcp = Recipe.count
     @chps = Hops.count
-    # erb :"home/index"
     slim :"home/index"
   end
 
@@ -86,22 +96,28 @@ class App < Sinatra::Base
   get "/recipes" do
     tab('recipes')
     @recipe = Recipe.order("id ASC")
+    @styles = Styles.order("name ASC")
     slim :"recipes/index"
   end
 
   post "/recipes" do
+    @rec = Recipe.new(params[:recipe])
+    if @rec.save!
+      redirect '/styles'
+    else
+      redirect '/'
+    end
   end
 
   post "/recipes/:id", :provides => :json do
     id = params[:id]
-    redirect '/recipes' unless id != 0
     Recipe.find(id).to_json
   end
 
   get "/styles" do
     tab('styles')
     @styles = Styles.order("name ASC")
-    slim :"styles/index"
+     slim :"styles/index"
   end
 
   get "/calculations" do

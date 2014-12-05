@@ -15,7 +15,15 @@ class Bitterness
   end
 
   def ibu
-    (@hop_grams * @util * @aa_percentage * 10) / (@batch_size * (1 + @adjustment))
+    if @hop_grams.kind_of?(Array)
+      @hop_grams.each_with_index do |grams, index|
+        avgibu = (grams * (18.11 + 13.86 * Math.tanh((@time[index] - 31.32) / 18.27)) * @aa_percentage[index] * 10) /
+                  (@batch_size * (1 + @adjustment))
+        return (avgibu / index) 
+    end
+    else
+      (@hop_grams * @util * @aa_percentage * 10) / (@batch_size * (1 + @adjustment))
+    end
   end
 
 end

@@ -11,12 +11,12 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
-            $(m_wrapper).append('<div class="form-group"><label for="fermentable_'+x+'" class="col-xs-1 control-label">Malt #'+x+'</label><div class="col-xs-2"><select class="form-control input-sm" id="fermentable_'+x+'" name="fermentable_[]"><option>Pilsener</option><option>Cara pils</option><option>Flaked corn</option></select></div><label for="kg_fermentable_'+x+'" class="col-xs-1 control-label">Kg</label><div class="col-xs-2"><input type="text" class="form-control input-sm" id="kg_fermentable_'+x+'" name="kg_fermentable_[]" /></div><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(m_wrapper).append('<div class="form-group"><label for="fermentable_'+x+'" class="col-xs-1 control-label">Malt #'+x+'</label><div class="col-xs-2"><select class="form-control input-sm" id="fermentable_'+x+'" name="fermentable_[]"><option>Pilsener</option><option>Cara pils</option><option>Flaked corn</option></select></div><label for="kg_fermentable_'+x+'" class="col-xs-1 control-label">Kg</label><div class="col-xs-2"><input type="text" class="form-control input-sm" id="kg_fermentable_'+x+'" name="kg_fermentable_[]" /></div><div class="col-xs-1"><button class="btn btn-xs remove_field"><i class="fa fa-minus-circle"></i></button></div></div>'); //add input box
         }
     });
 
     $(m_wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); x--;
+        e.preventDefault(); $(this).parent('div').parent('div').remove(); x--; // parent.parent to prevent col-xs-1 to be the only one removed
     });
 
     var h = 1; //initlal text box count
@@ -38,12 +38,12 @@ $(document).ready(function() {
           e.preventDefault();
           if(h < max_fields){ //max input box allowed
               h++; //text box increment
-              $(h_wrapper).append('<div class="form-group"><label for="hop_name_'+h+'" class="col-xs-1 control-label">Hop #'+h+'</label><div class="col-xs-2"><select class="form-control input-sm" id="hop_name_'+h+'" name="hop_name_[]">'+select+'</select></div><label for="hop_grams_'+h+'" class="col-xs-1 control-label">Grams</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="hop_grams_'+h+'" name="hgrams[]" /></div><label for="alpha_acid_'+h+'" class="col-xs-1 control-label">Alpha acid</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="alpha_acid_'+h+'" name="aa[]"></div><label for="boil_time_'+h+'" class="col-xs-1 control-label">Boil time</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="boil_time_'+h+'" name="btime[]"></div><a href="#" class="remove_field">Remove</a></div>'); //add input box
+              $(h_wrapper).append('<div class="form-group"><label for="hop_name_'+h+'" class="col-xs-1 control-label">Hop #'+h+'</label><div class="col-xs-2"><select class="form-control input-sm" id="hop_name_'+h+'" name="hop_name_[]">'+select+'</select></div><label for="hop_grams_'+h+'" class="col-xs-1 control-label">Grams</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="hop_grams_'+h+'" name="hgrams[]" /></div><label for="alpha_acid_'+h+'" class="col-xs-1 control-label">Alpha acid</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="alpha_acid_'+h+'" name="aa[]"></div><label for="boil_time_'+h+'" class="col-xs-1 control-label">Boil time</label><div class="col-xs-1"><input type="text" class="form-control input-sm" id="boil_time_'+h+'" name="btime[]"></div><div class="col-xs-1"><button class="btn btn-xs remove_field"><i class="fa fa-minus-circle"></i></button></div></div>'); //add input box
           }
         });
 
     $(h_wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); $(this).parent('div').remove(); h--;
+        e.preventDefault(); $(this).parent('div').parent('div').remove(); h--;
     });
 
   // login form
@@ -133,11 +133,11 @@ $(document).ready(function() {
     });
   });
 
-  $(".submit").click(function(){
-    return false;
-  })
+  // $(".submit").click(function(){
+  //   return false;
+  // })
 
-  $("#specform").change(function(){
+  $("#specform").on('change', function(){
     var gm, aa, bt, bs;
 
      $("#recipe").val(null);
@@ -173,11 +173,11 @@ $(document).ready(function() {
         type: "POST",
         url: "/recipes/" + rcp,
         success:function(rcpdata) {
-          $("#output").html(rcpdata.IBU);
-          $("#og").val(rcpdata.OG);
-          $("#fg").val(rcpdata.FG);
-          $("#batch_size").val(rcpdata.Litri);
-          $("#style").val(rcpdata.Stile);
+          $("#output").html(rcpdata.ibu);
+          $("#og").val(rcpdata.og);
+          $("#fg").val(rcpdata.fg);
+          $("#batch_size").val(rcpdata.batch);
+          $("#style").val(rcpdata.style);
           input.trigger('input');
           // scope.val(rcpdata.OG);
         },
@@ -191,13 +191,16 @@ $(document).ready(function() {
     $('#myTabContent').on('click','a', function(e) {
       e.preventDefault();
       var id = $(this).attr('id');
-      var idd = parseInt(id) + 1;
-      var nav = '<nav><ul class="pager"><li class="previous"><a href="recipes"><span aria-hidden="true">&larr;</span> Glossary</a></li><li class="next"><a href="#" id=' + idd +'>Newer <span aria-hidden="true">&rarr;</span></a></li></ul></nav>';
+      var nextId = parseInt(id) + 1;
+      var prevId = parseInt(id) - 1;
+      var nav = '<nav><ul class="pager"><li class="previous"><a href="#" id=' + prevId + '><span aria-hidden="true">&larr;</span> Previous</a></li><li class="next"><a href="#" id=' + nextId +'>Next <span aria-hidden="true">&rarr;</span></a></li></ul></nav>';
       $.ajax({
         type: 'POST',
         url : '/recipes/' + id,
         success:function(rcpdata) {
-          $('#myTabContent').html(nav + '<h6>' + rcpdata.Nome + '</h6><p>Ibu: ' + rcpdata.IBU);
+          var panel = '<div class="panel panel-default"><div class="panel-heading">' + rcpdata.name + '</div><div class="panel-body">';
+          var desc = '<article><h4>Description:</h4><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat at nisl nec euismod. Morbi imperdiet ac ante non sollicitudin. Pellentesque porttitor erat libero, eu hendrerit lacus luctus bibendum. Duis eu sagittis purus. Duis varius augue a tempor aliquet. Curabitur vitae venenatis orci. Maecenas dictum lacus vel cursus suscipit.</p></article>';
+          $('#myTabContent').html(panel + '<div class="col-lg-10 col-md-10 col-xs-10">IBU:<span class="resultset">' + rcpdata.ibu + '</span>Original Gravity:<span class="resultset">' + rcpdata.og + '</span>Final Gravity:<span class="resultset">' + rcpdata.fg + '</span>Batch:<span class="resultset">' + rcpdata.batch +' l.</span>Alcool:<span class="resultset">' + rcpdata.abv + ' %</span>'  + desc + '</div></div></div>' + nav);
         },
         error:function(req) {
           // $('#myTabContent').html('req.responseText');
@@ -206,3 +209,42 @@ $(document).ready(function() {
       });
     });
 });
+
+// Changes XML to JSON
+function xmlToJson(xml) {
+
+  // Create the return object
+  var obj = {};
+
+  if (xml.nodeType == 1) { // element
+    // do attributes
+    if (xml.attributes.length > 0) {
+      obj["@attributes"] = {};
+      for (var j = 0; j < xml.attributes.length; j++) {
+        var attribute = xml.attributes.item(j);
+        obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+      }
+    }
+  } else if (xml.nodeType == 3) { // text
+    obj = xml.nodeValue;
+  }
+
+  // do children
+  if (xml.hasChildNodes()) {
+    for(var i = 0; i < xml.childNodes.length; i++) {
+      var item = xml.childNodes.item(i);
+      var nodeName = item.nodeName;
+      if (typeof(obj[nodeName]) == "undefined") {
+        obj[nodeName] = xmlToJson(item);
+      } else {
+        if (typeof(obj[nodeName].push) == "undefined") {
+          var old = obj[nodeName];
+          obj[nodeName] = [];
+          obj[nodeName].push(old);
+        }
+        obj[nodeName].push(xmlToJson(item));
+      }
+    }
+  }
+  return obj;
+};

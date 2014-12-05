@@ -1,20 +1,33 @@
 .col-lg-12
   .page-header
-    h5 Recipes
+    h4 Styles
   #content
-    table.tbl
-      thead
-        tr
-          th Style
-          th OG
-          th FG
-          th IBU
-          th ABV
-      tbody
-      - @styles.each do |s|
-        tr
-          td #{s.name}
-          td #{s.og}
-          td #{s.fg}
-          td #{s.ibu}
-          td #{s.abv}
+    - @styles.each do |s|
+      dl.dl-horizontal
+        dt Style
+        dd #{s.name}
+        dt OG
+        dd #{s.og}
+        dt FG
+        dd #{s.fg}
+        dt IBU
+        dd #{s.ibu}
+        dt ABV
+        dd #{s.abv}
+
+/ table.tbl
+/   thead
+/     tr
+/       th Style
+/       th OG
+/       th FG
+/       th IBU
+/       th ABV
+/   tbody
+/   - @styles.each do |s|
+/     tr
+/       td #{s.name}
+/       td #{s.og}
+/       td #{s.fg}
+/       td #{s.ibu}
+/       td #{s.abv}

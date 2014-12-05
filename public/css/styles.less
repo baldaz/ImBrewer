@@ -1,5 +1,5 @@
 @import url("http://fonts.googleapis.com/css?family=Delius");
-@primary_color: #333333;
+@primary_color: #444444;
 *{ margin: 0; padding: 0; box-sizing: border-box;}
 html, body {height: 100%;}
 body {
@@ -8,8 +8,8 @@ body {
   background-position: center; background-attachment: fixed;
   color: #333; text-shadow: 0px 1px 1px #d4d4d4
 }
-body p {font-size:0.8em; text-align:justify; margin: 1.5em 0;}
-h5,h6 {font-family:Delius;}
+body p {font-size:.8em; text-align:justify; margin: .8em 0 .5em 0;}
+h3,h4,h5,h6 {font-family:Delius;}
 #footer p {text-align:center;}
 .page-header {margin:0; padding:0; border:0;}
 .panel-title {font-size:inherit;}
@@ -25,7 +25,7 @@ h5,h6 {font-family:Delius;}
 .navbar.navbar-default i {display:block; float:left; width:20px; line-height:24px}
 .navbar.navbar-default a {transition:all .7s; text-shadow:1px 1px #bbb; color:@primary_color;}
 .navbar.navbar-default a.active{border-color:green;}
-#content {min-height: 75%}
+#content {min-height: auto;}
 .tbl {width:100%; margin-right:2%; border-collapse:collapse;}
 .tbl th {
   border-bottom: 1px solid #777777; text-align: left; padding: 0.5em;
@@ -34,6 +34,7 @@ h5,h6 {font-family:Delius;}
 .tbl td {padding: 2px; font-weight: 400; color: #333; font-size: .7em;}
 .tbl tr:nth-child(2n+2) {background-color: rgba(51,51,51,0.2);}
 .tbl.recipes {width:15%;}
+.tab-content {margin-top:20px;}
 .rcp-window {float:left; display:block; width:auto; height:auto;}
 ::-webkit-scrollbar {width: 6px;}
 ::-webkit-scrollbar-track {
@@ -42,8 +43,7 @@ h5,h6 {font-family:Delius;}
 }
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px; border-radius: 10px;
-    background: rgba(0,0,0,0.3);
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.3); -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
 }
 ::-webkit-scrollbar-thumb:window-inactive {background: rgba(0,0,0,0.4);}
 ::-webkit-input-placeholder {font-size:0.9em; padding-left:5px; font-style:italic;}
@@ -63,10 +63,15 @@ input[type="number"], input[type="text"] {
     width:90%; font-size: 0.7em;
     background-color: rgba(255,255,255,0.5)
 }
+.dl-horizontal {font-size:10px;}
+// dl {border: 3px double #ccc; padding:.5em;}
+// dt {float:left; clear:left; width:40px;text-align:right; font-weight:bold; color:green; font-size:13px;}
+// dt:after {content: ":";}
+// dd {margin: 0 0 0 50px; padding: 0 0 .4em 0; font-size:11px;}
 .panel.panel-default {background: transparent;}
 .panel-default .panel-heading {background:rgba(51,51,51,0.3);}
 .panel-heading {padding:5px 12px;}
-.resultset {margin:0 30px 0 0; font-size: 0.8em; color: rgb(20,160,70);}
+.resultset {margin:0 30px 0 0; padding-left:8px; line-height:5px; font-size:.9em; color:rgb(20,160,70);}
 /* login form */
 main {
   width:500px; margin:10px auto; padding-bottom:10px;
@@ -93,7 +98,7 @@ h1{
 .ch:last-child{padding-right:2px;}
 .focussed{pointer-events:none;}
 /* form recipes */
-#msform {width:500px; margin:10px auto; text-align:center; position:relative;}
+#msform {width:600px; margin:10px auto; text-align:center; position:relative;}
 #msform fieldset{
   background:rgba(255,255,255,0.7); border:0 none;
   border-radius:10px; box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
@@ -101,7 +106,7 @@ h1{
   margin:0 10%; position:absolute;
 }
 #msform fieldset:not(:first-of-type) {display:none;}
-#msform input {
+#msform input, #msform select {
   padding:5px; border:1px solid #ccc;
   border-radius:3px; margin-bottom:10px;
   width:100%; box-sizing:border-box;

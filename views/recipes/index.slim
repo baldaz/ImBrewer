@@ -1,6 +1,6 @@
 .col-lg-12
   .page-header
-    h5 Recipes
+    h4 Cookbook
   #content
     .bs-component
       ul.nav.nav-tabs
@@ -13,7 +13,6 @@
               tr
                 th Name
                 th Style
-                th Type
                 th OG
                 th FG
                 th IBU
@@ -23,17 +22,16 @@
             tbody
               - @recipe.each do |rcp|
                   tr
-                    td: a href='#' id='#{rcp.id}' #{rcp.Nome}
-                    td #{rcp.Stile}
-                    td #{rcp.Tipologia}
-                    td #{rcp.OG}
-                    td #{rcp.FG}
-                    td #{rcp.IBU}
-                    td #{rcp.Alcool}
-                    td #{rcp.Litri} liters
-                    td #{rcp.TempoBollitura} min
+                    td: a href='#' id='#{rcp.id}' #{rcp.name}
+                    td #{rcp.style}
+                    td #{rcp.og}
+                    td #{rcp.fg}
+                    td #{rcp.ibu}
+                    td #{rcp.abv}
+                    td #{rcp.batch} liters
+                    td #{rcp.btime} min
         #insert.tab-pane.fade
-          form#msform
+          form#msform action='' method='post' role='form'
             ul#progressbar
               li.pbactive Recipe specifications
               li Ingredients
@@ -41,24 +39,26 @@
             fieldset
               h2.fs-title Insert specifications
               h3.fs-subtitle Step 1
-              input#name type="text" name="name" placeholder="Recipe name"
-              input type="text" name="ibu" placeholder="Ibu"
-              input type="text" name="og" placeholder="Original Gravity"
-              input type="text" name="alcool" placeholder="Alcool %"
-              input type="text" name="batch" placeholder="Batch size"
+              input#recipe_name type="text" name="recipe[name]" placeholder="Recipe name"
+              select#recipe_style name="recipe[style]"
+                - @styles.each do |s|
+                  option id='#{s.name}' #{s.name}
+              input#recipe_batch type="text" name="recipe[batch]" placeholder="Batch size"
+              input#recipe_btime type="text" name="recipe[btime]" placeholder="Boil time"
               input type="button" name="next" class="next action-button" value="next"
             fieldset
               h2.fs-title Insert ingredients
               h3.fs-subtitle Step 2
-              input type="text" name="malt" placeholder="Malt name"
-              input type="text" name="hop" placeholder="Hop name"
-              input type="text" name="yeast" placeholder="Yeast name"
+              input#recipe_ibu type="text" name="recipe[ibu]" placeholder="Ibu"
+              input#recipe_og type="text" name="recipe[og]" placeholder="Original Gravity"
+              input#recipe_fg type="text" name="recipe[fg]" placeholder="Final Gravity"
+              input#recipe_abv type="text" name="recipe[abv]" placeholder="Alcool %"
               input type="button" name="previous" class="previous action-button" value="previous"
               input type="button" name="next" class="next action-button" value="next"
             fieldset
               h2.fs-title Insert phases
               h3.fs-subtitle Step 3
-              input type="text" name="mash" placeholder="Mashing phase 1"
+              input#recipe_dhop type="text" name="recipe[dhop]" placeholder="Dry hopping"
               input type="text" name="timemash" placeholder="Time mashing phase 1"
               input type="text" name="hopping" placeholder="Hopping phase 1"
               input type="text" name="timehop" placeholder="Time hopping phase 1"

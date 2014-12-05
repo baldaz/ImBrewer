@@ -1,6 +1,6 @@
 .col-lg-12.col-md-12.col-xs-12 data-ng-app='' data-ng-init='og=1010;fg=1005;batch=23;kg=5;'
   .page-header
-    h5 Calculations
+    h4 Calculations
   .panel.panel-default
     .panel-heading
       h6.panel-title Results for <span id='rcpname'></span>
@@ -23,7 +23,7 @@
             select#recipe.form-control.input-sm
               option value='' generic recipe
               - @recipe.each do |r|
-                  option value='#{r.id}' #{r.Nome}
+                  option value='#{r.id}' #{r.name}
     form#specform.form-horizontal action='' method='post' role='form'
       fieldset
         legend Specifications
